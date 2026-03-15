@@ -1,0 +1,12 @@
+CompileFlags:
+  Add: [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-mmcu=atmega328p",
+    "-DF_CPU=1000000UL",
+    "--target=avr",
+    "-I", "C:/avr-gcc/avr/include"
+  ]
+
+  CompilationDatabase: .

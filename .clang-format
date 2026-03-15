@@ -1,0 +1,9 @@
+BasedOnStyle: Microsoft
+
+BinPackArguments: false
+AllowAllArgumentsOnNextLine: false
+AlignAfterOpenBracket: AlwaysBreak
+
+KeepEmptyLinesAtTheStartOfBlocks: true
+
+IndentCaseLabels: true
