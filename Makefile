@@ -10,7 +10,7 @@ CC = avr-gcc
 OBJCOPY = avr-objcopy
 AVRDUDE = avrdude
 
-CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
+CFLAGS = -Wall -Wextra -Wpedantic -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 
 all: $(TARGET).hex
 
