@@ -54,8 +54,17 @@ typedef enum
     UPDATE_TYPE_MOVE_PADDLE_RIGHT
 } UpdateType;
 
-void RenderGameState(GameState *gameState)
+void Initialise(GameState *gameState)
 {
+    gameState->movingBallLocation.x = 6;
+    gameState->movingBallLocation.y = 0;
+    gameState->movingBallDirection = TOWARDS_UPRIGHT;
+    gameState->paddleLocation = 0;
+    for (int i = 0; i < 16; i++)
+    {
+        gameState->remainingBalls[i].x = i % MATRIX_LED_WIDTH;
+        gameState->remainingBalls[i].y = (int8_t)i / MATRIX_LED_WIDTH;
+    }
 }
 
 void MovePoint(Direction direction, Point point, Direction *newDirection, Point *newPoint)
@@ -77,7 +86,7 @@ void MovePoint(Direction direction, Point point, Direction *newDirection, Point 
     }
 }
 
-void UpdateGameState(UpdateType updateType, GameState *gameState)
+void Update(UpdateType updateType, GameState *gameState)
 {
     switch (updateType)
     {
@@ -108,6 +117,10 @@ void UpdateGameState(UpdateType updateType, GameState *gameState)
     }
 }
 
+void View(GameState *gameState)
+{
+}
+
 int main(void)
 {
     // PORTB output
@@ -119,19 +132,11 @@ int main(void)
     PORTC |= (1 << BUTTON_MOVE_LEFT_PIN) | (1 << BUTTON_MOVE_RIGHT_PIN);
 
     GameState currentGameState;
-    currentGameState.movingBallLocation.x = 6;
-    currentGameState.movingBallLocation.y = 0;
-    currentGameState.movingBallDirection = TOWARDS_UPRIGHT;
-    currentGameState.paddleLocation = 0;
-    for (int i = 0; i < 16; i++)
-    {
-        currentGameState.remainingBalls[i].x = i % MATRIX_LED_WIDTH;
-        currentGameState.remainingBalls[i].y = (int8_t)i / MATRIX_LED_WIDTH;
-    }
+    Initialise(&currentGameState);
 
     for (;;)
     {
-        RenderGameState(&currentGameState);
+        View(&currentGameState);
     }
 
     return 0;
