@@ -1,2 +1,9 @@
 *.elf
 *.hex
+
+atmega328p-breakout-game/*.lck
+atmega328p-breakout-game/*.bak
+atmega328p-breakout-game/*-backups/
+atmega328p-breakout-game/_autosave-*
+atmega328p-breakout-game/*.kicad_prl
+atmega328p-breakout-game/fp-info-cache

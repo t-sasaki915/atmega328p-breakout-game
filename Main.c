@@ -31,15 +31,81 @@ typedef struct
     int8_t y;
 } Point;
 
+typedef enum
+{
+    TOWARDS_UPRIGHT,
+    TOWARDS_UPLEFT,
+    TOWARDS_DOWNRIGHT,
+    TOWARDS_DOWNLEFT
+} Direction;
+
 typedef struct
 {
     Point movingBallLocation;
+    Direction movingBallDirection;
     int8_t paddleLocation;
     Point remainingBalls[16];
 } GameState;
 
-void RenderGameState(GameState gameState)
+typedef enum
 {
+    UPDATE_TYPE_TICK,
+    UPDATE_TYPE_MOVE_PADDLE_LEFT,
+    UPDATE_TYPE_MOVE_PADDLE_RIGHT
+} UpdateType;
+
+void RenderGameState(GameState *gameState)
+{
+}
+
+void MovePoint(Direction direction, Point point, Direction *newDirection, Point *newPoint)
+{
+    switch (direction)
+    {
+        case TOWARDS_UPRIGHT: {
+            break;
+        }
+        case TOWARDS_UPLEFT: {
+            break;
+        }
+        case TOWARDS_DOWNRIGHT: {
+            break;
+        }
+        case TOWARDS_DOWNLEFT: {
+            break;
+        }
+    }
+}
+
+void UpdateGameState(UpdateType updateType, GameState *gameState)
+{
+    switch (updateType)
+    {
+        case UPDATE_TYPE_TICK: {
+
+            break;
+        }
+        case UPDATE_TYPE_MOVE_PADDLE_LEFT: {
+            if (gameState->paddleLocation <= 0)
+            {
+                return;
+            }
+
+            gameState->paddleLocation--;
+
+            break;
+        }
+        case UPDATE_TYPE_MOVE_PADDLE_RIGHT: {
+            if (gameState->paddleLocation >= MATRIX_LED_WIDTH - 1)
+            {
+                return;
+            }
+
+            gameState->paddleLocation++;
+
+            break;
+        }
+    }
 }
 
 int main(void)
@@ -55,6 +121,7 @@ int main(void)
     GameState currentGameState;
     currentGameState.movingBallLocation.x = 6;
     currentGameState.movingBallLocation.y = 0;
+    currentGameState.movingBallDirection = TOWARDS_UPRIGHT;
     currentGameState.paddleLocation = 0;
     for (int i = 0; i < 16; i++)
     {
@@ -64,7 +131,7 @@ int main(void)
 
     for (;;)
     {
-        RenderGameState(currentGameState);
+        RenderGameState(&currentGameState);
     }
 
     return 0;
