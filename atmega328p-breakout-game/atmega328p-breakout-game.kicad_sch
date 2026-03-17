@@ -8229,7 +8229,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 142.24) (xy 133.35 142.24)
+			(xy 123.19 142.24) (xy 133.35 142.24)
 		)
 		(stroke
 			(width 0)
@@ -8289,7 +8289,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 92.71) (xy 129.54 92.71)
+			(xy 123.19 92.71) (xy 130.81 92.71)
 		)
 		(stroke
 			(width 0)
@@ -8349,7 +8349,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 69.85) (xy 170.18 69.85)
+			(xy 139.7 69.85) (xy 170.18 69.85)
 		)
 		(stroke
 			(width 0)
@@ -8359,7 +8359,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 168.91) (xy 130.81 168.91)
+			(xy 123.19 168.91) (xy 130.81 168.91)
 		)
 		(stroke
 			(width 0)
@@ -8599,7 +8599,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 151.13) (xy 130.81 151.13)
+			(xy 123.19 151.13) (xy 130.81 151.13)
 		)
 		(stroke
 			(width 0)
@@ -8729,7 +8729,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 109.22) (xy 133.35 109.22)
+			(xy 123.19 109.22) (xy 133.35 109.22)
 		)
 		(stroke
 			(width 0)
@@ -8739,7 +8739,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 125.73) (xy 130.81 125.73)
+			(xy 123.19 125.73) (xy 130.81 125.73)
 		)
 		(stroke
 			(width 0)
@@ -8789,7 +8789,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 74.93) (xy 129.54 74.93)
+			(xy 123.19 74.93) (xy 130.81 74.93)
 		)
 		(stroke
 			(width 0)
@@ -8809,7 +8809,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 87.63) (xy 167.64 87.63)
+			(xy 139.7 87.63) (xy 167.64 87.63)
 		)
 		(stroke
 			(width 0)
@@ -8979,7 +8979,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 116.84) (xy 133.35 116.84)
+			(xy 123.19 116.84) (xy 133.35 116.84)
 		)
 		(stroke
 			(width 0)
@@ -9088,7 +9088,7 @@
 		(uuid "14d3dfaa-4237-4fcf-939c-71ccb60710dd")
 	)
 	(label "PORTB0"
-		(at 121.92 74.93 0)
+		(at 123.19 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9108,7 +9108,7 @@
 		(uuid "17b889b0-f8d2-4d71-b754-4368eda02623")
 	)
 	(label "PORTB1"
-		(at 121.92 92.71 0)
+		(at 123.19 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9178,7 +9178,7 @@
 		(uuid "3307c00a-fa8a-495d-b787-586684eec601")
 	)
 	(label "PORTB2"
-		(at 121.92 109.22 0)
+		(at 123.19 109.22 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9288,7 +9288,7 @@
 		(uuid "74f089e0-59e1-481e-9507-619e8492b134")
 	)
 	(label "PORTB6"
-		(at 121.92 151.13 0)
+		(at 123.19 151.13 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9298,7 +9298,7 @@
 		(uuid "928fb197-c648-4206-8f52-099e95b17c39")
 	)
 	(label "PORTB4"
-		(at 121.92 125.73 0)
+		(at 123.19 125.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9318,7 +9318,7 @@
 		(uuid "a8b36384-0932-4f34-a702-ac05b583c3f1")
 	)
 	(label "PORTB7"
-		(at 121.92 168.91 0)
+		(at 123.19 168.91 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9348,7 +9348,7 @@
 		(uuid "bbcbb665-f826-4c0e-960e-95636833202e")
 	)
 	(label "PORTB3"
-		(at 121.92 116.84 0)
+		(at 123.19 116.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9378,7 +9378,7 @@
 		(uuid "cd57b4a6-9e8a-4d07-beab-c94116d3d3ef")
 	)
 	(label "PORTB5"
-		(at 121.92 142.24 0)
+		(at 123.19 142.24 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9601,7 +9601,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 137.16 151.13 0)
 			(effects
 				(font
@@ -9673,7 +9673,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 226.06 126.492 90)
 			(effects
 				(font
@@ -9853,7 +9853,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 138.43 80.01 0)
+		(at 139.7 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9862,7 +9862,7 @@
 		(fields_autoplaced yes)
 		(uuid "358d6a02-57f3-4ddb-9124-29d57e84684a")
 		(property "Reference" "#PWR012"
-			(at 138.43 86.36 0)
+			(at 139.7 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9871,7 +9871,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 138.43 85.09 0)
+			(at 139.7 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9879,7 +9879,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 138.43 80.01 0)
+			(at 139.7 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9888,7 +9888,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 80.01 0)
+			(at 139.7 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9897,7 +9897,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 138.43 80.01 0)
+			(at 139.7 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10078,7 +10078,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 137.16 115.062 90)
 			(effects
 				(font
@@ -10122,7 +10122,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 138.43 97.79 0)
+		(at 139.7 97.79 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10131,7 +10131,7 @@
 		(fields_autoplaced yes)
 		(uuid "3951bd2d-6999-40e1-b8cc-7c6992df92fe")
 		(property "Reference" "#PWR013"
-			(at 138.43 104.14 0)
+			(at 139.7 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10140,7 +10140,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 138.43 102.87 0)
+			(at 139.7 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10148,7 +10148,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 138.43 97.79 0)
+			(at 139.7 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10157,7 +10157,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 97.79 0)
+			(at 139.7 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10166,7 +10166,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 138.43 97.79 0)
+			(at 139.7 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10428,7 +10428,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 137.16 107.442 90)
 			(effects
 				(font
@@ -10564,7 +10564,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 137.16 125.73 0)
 			(effects
 				(font
@@ -10636,7 +10636,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 226.06 68.072 90)
 			(effects
 				(font
@@ -11105,7 +11105,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 227.33 111.76 0)
 			(effects
 				(font
@@ -11355,7 +11355,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 137.16 140.462 90)
 			(effects
 				(font
@@ -11488,7 +11488,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 226.06 74.422 90)
 			(effects
 				(font
@@ -11624,7 +11624,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 227.33 143.51 0)
 			(effects
 				(font
@@ -11833,7 +11833,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 226.06 132.842 90)
 			(effects
 				(font
@@ -11877,7 +11877,7 @@
 	)
 	(symbol
 		(lib_id "Transistor_BJT:DTC114E")
-		(at 135.89 74.93 0)
+		(at 137.16 74.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11886,7 +11886,7 @@
 		(fields_autoplaced yes)
 		(uuid "aa8bb3fd-51cd-47c1-8b39-9540366b8d7d")
 		(property "Reference" "Q1"
-			(at 140.97 73.6599 0)
+			(at 142.24 73.6599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11895,7 +11895,7 @@
 			)
 		)
 		(property "Value" "DTC114E"
-			(at 140.97 76.1999 0)
+			(at 142.24 76.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11903,8 +11903,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 135.89 74.93 0)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11914,7 +11914,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 74.93 0)
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11924,7 +11924,7 @@
 			)
 		)
 		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 135.89 74.93 0)
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11952,7 +11952,7 @@
 	)
 	(symbol
 		(lib_id "Transistor_BJT:DTC114E")
-		(at 135.89 92.71 0)
+		(at 137.16 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11961,7 +11961,7 @@
 		(fields_autoplaced yes)
 		(uuid "aee9f3b3-cabd-43a4-97c2-34c13ff0f120")
 		(property "Reference" "Q2"
-			(at 140.97 91.4399 0)
+			(at 142.24 91.4399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11970,7 +11970,7 @@
 			)
 		)
 		(property "Value" "DTC114E"
-			(at 140.97 93.9799 0)
+			(at 142.24 93.9799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11978,8 +11978,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 135.89 92.71 0)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11989,7 +11989,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 135.89 92.71 0)
+			(at 137.16 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11999,7 +11999,7 @@
 			)
 		)
 		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 135.89 92.71 0)
+			(at 137.16 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12318,7 +12318,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 227.33 86.36 0)
 			(effects
 				(font
@@ -12390,7 +12390,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 226.06 101.092 90)
 			(effects
 				(font
@@ -12458,7 +12458,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Straight_CK_OS102011MS2Q"
 			(at 109.22 35.56 0)
 			(effects
 				(font
@@ -12673,7 +12673,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
 			(at 137.16 168.91 0)
 			(effects
 				(font
