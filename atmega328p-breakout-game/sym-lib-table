@@ -1,4 +1,4 @@
 (sym_lib_table
   (version 7)
-  (lib (name "LED_1088as")(type "KiCad")(uri "${KIPRJMOD}/libs/LED_1088as.kicad_sym")(options "")(descr ""))
+  (lib (name "D15881-M-UR3-0-W")(type "KiCad")(uri "${KIPRJMOD}/libs/D15881-M-UR3-0-W.kicad_sym")(options "")(descr ""))
 )
