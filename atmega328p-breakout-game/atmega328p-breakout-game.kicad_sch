@@ -11178,7 +11178,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_1588:LED_1588"
 			(at 240.03 86.36 0)
 			(effects
 				(font

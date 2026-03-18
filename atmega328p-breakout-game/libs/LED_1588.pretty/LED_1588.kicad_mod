@@ -262,15 +262,4 @@
 		(uuid "dd9e2bfc-14de-450d-b2e0-66f4ba416eca")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/libs/LED_1088.pretty/LED_1088.step"
-		(offset
-			(xyz 19 -12.2 4.7)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 90 0 90)
-		)
-	)
 )
