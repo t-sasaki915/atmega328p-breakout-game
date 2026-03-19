@@ -249,6 +249,8 @@ int main(void)
 
     Initialise();
 
+    View();
+
     for (;;)
     {
         Update(UPDATE_TYPE_TICK);
