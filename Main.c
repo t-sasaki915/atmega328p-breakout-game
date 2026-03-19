@@ -56,8 +56,8 @@ typedef enum
 
 void Initialise(GameState *gameState)
 {
-    gameState->movingBallLocation.x = 6;
-    gameState->movingBallLocation.y = 0;
+    gameState->movingBallLocation.x = 0;
+    gameState->movingBallLocation.y = 1;
     gameState->movingBallDirection = TOWARDS_UPRIGHT;
     gameState->paddleLocation = 0;
     for (int i = 0; i < 16; i++)
@@ -187,6 +187,7 @@ void Update(UpdateType updateType, GameState *gameState)
     switch (updateType)
     {
         case UPDATE_TYPE_TICK: {
+            MovePoint(&gameState->movingBallDirection, &gameState->movingBallLocation);
 
             break;
         }
