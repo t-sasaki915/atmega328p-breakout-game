@@ -70,7 +70,7 @@ void Initialise(void)
     }
 }
 
-void MoveBall()
+void MoveBall(void)
 {
     switch (GAME_STATE.movingBallDirection)
     {
