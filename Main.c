@@ -67,20 +67,116 @@ void Initialise(GameState *gameState)
     }
 }
 
-void MovePoint(Direction direction, Point point, Direction *newDirection, Point *newPoint)
+void MovePoint(Direction *direction, Point *point)
 {
-    switch (direction)
+    switch (*direction)
     {
         case TOWARDS_UPRIGHT: {
+            if (point->x < 7 && point->y < 7)
+            {
+                point->x++;
+                point->y++;
+            }
+            else if (point->x >= 7 && point->y < 7)
+            {
+                *direction = TOWARDS_UPLEFT;
+                point->x--;
+                point->y++;
+            }
+            else if (point->x < 7 && point->y >= 7)
+            {
+                *direction = TOWARDS_DOWNRIGHT;
+                point->x++;
+                point->y--;
+            }
+            else // point->x >= 7 && point->y >= 7
+            {
+                *direction = TOWARDS_DOWNLEFT;
+                point->x--;
+                point->y--;
+            }
+
             break;
         }
         case TOWARDS_UPLEFT: {
+            if (point->x > 0 && point->y < 7)
+            {
+                point->x--;
+                point->y++;
+            }
+            else if (point->x <= 0 && point->y < 7)
+            {
+                *direction = TOWARDS_UPRIGHT;
+                point->x++;
+                point->y++;
+            }
+            else if (point->x > 0 && point->y >= 7)
+            {
+                *direction = TOWARDS_DOWNLEFT;
+                point->x--;
+                point->y--;
+            }
+            else // point->x <= 0 && point->y >= 7
+            {
+                *direction = TOWARDS_DOWNRIGHT;
+                point->x++;
+                point->y--;
+            }
+
             break;
         }
         case TOWARDS_DOWNRIGHT: {
+            if (point->x < 7 && point->y > 0)
+            {
+                point->x++;
+                point->y--;
+            }
+            else if (point->x >= 7 && point->y > 0)
+            {
+                *direction = TOWARDS_DOWNLEFT;
+                point->x--;
+                point->y--;
+            }
+            else if (point->x < 7 && point->y <= 0)
+            {
+                *direction = TOWARDS_UPRIGHT;
+                point->x++;
+                point->y++;
+            }
+            else // point->x >= 7 && point->y <= 0
+            {
+                *direction = TOWARDS_UPLEFT;
+                point->x--;
+                point->y++;
+            }
+
             break;
         }
         case TOWARDS_DOWNLEFT: {
+            if (point->x > 0 && point->y > 0)
+            {
+                point->x--;
+                point->y--;
+            }
+            else if (point->x <= 0 && point->y > 0)
+            {
+                *direction = TOWARDS_DOWNRIGHT;
+                point->x++;
+                point->y--;
+            }
+            else if (point->x > 0 && point->y <= 0)
+            {
+                *direction = TOWARDS_UPLEFT;
+                point->x--;
+                point->y++;
+            }
+            else // point->x <= 0 && point->y <= 0
+            {
+                *direction = TOWARDS_UPRIGHT;
+                point->x++;
+                point->y++;
+            }
+
             break;
         }
     }
