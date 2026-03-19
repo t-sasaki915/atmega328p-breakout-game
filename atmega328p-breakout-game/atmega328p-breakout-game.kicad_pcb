@@ -4400,7 +4400,7 @@
 	(footprint "Button_Switch_THT:SW_Slide_SPDT_Straight_CK_OS102011MS2Q"
 		(layer "F.Cu")
 		(uuid "f2ef10a2-beb0-4901-99c0-8468cc5c1f61")
-		(at 177.5 79.5)
+		(at 177.470001 79.816911)
 		(descr "CuK miniature slide switch, OS series, SPDT, https://www.ckswitches.com/media/1428/os.pdf")
 		(tags "switch SPDT")
 		(property "Reference" "SW4"
@@ -8928,8 +8928,8 @@
 		)
 	)
 	(gr_rect
-		(start 94.62 48.1)
-		(end 216.73 146.48)
+		(start 117.89 64.37)
+		(end 188.29 126.65)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -8937,6 +8937,138 @@
 		(fill no)
 		(layer "Edge.Cuts")
 		(uuid "d45e059f-20ae-413e-95bd-bdb6f3e4990d")
+	)
+	(gr_text "ATmega328P"
+		(at 162.44 106.63 0)
+		(layer "F.SilkS")
+		(uuid "1603016d-c80a-464f-9660-483ac639355f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "+"
+		(at 177.35 67.47 0)
+		(layer "F.SilkS")
+		(uuid "63bf03c6-47aa-4084-89af-34813b5afb44")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "4.5V"
+		(at 177.76 75.86 0)
+		(layer "F.SilkS")
+		(uuid "7ba2322d-339d-477e-9c29-11342a59701c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "0.1μF"
+		(at 179.43 90.45 90)
+		(layer "F.SilkS")
+		(uuid "858e0bfa-03c0-4a7f-8d17-440cd2c03c0c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "10μF"
+		(at 181.14 92.34 0)
+		(layer "F.SilkS")
+		(uuid "8bf2e899-c838-4489-bdca-eda0a719927c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "10kΩ"
+		(at 125.2 113.46 0)
+		(layer "F.SilkS")
+		(uuid "9002c415-ca43-45b9-9515-c039887a8131")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SW_RESET"
+		(at 164.01 123.79 0)
+		(layer "F.SilkS")
+		(uuid "b28b7216-0703-4233-b6c4-460a34314b5b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "10kΩ"
+		(at 165.33 113.46 0)
+		(layer "F.SilkS")
+		(uuid "b31832de-e2f6-4c55-8b79-bdf0313b768d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SW_MOVE_RIGHT"
+		(at 147.77 123.79 0)
+		(layer "F.SilkS")
+		(uuid "d8b5afc2-695d-458d-bc7f-3915aa9199b9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "10kΩ"
+		(at 151.21 113.47 0)
+		(layer "F.SilkS")
+		(uuid "e0e19871-45e4-41a2-a51d-d1bd1310e2e8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SW_MOVE_LEFT"
+		(at 122.26 123.79 0)
+		(layer "F.SilkS")
+		(uuid "ffbd5704-5e7a-45b0-b1e7-df384b0f57d7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
 	)
 	(segment
 		(start 148.399 111.481)
@@ -9011,14 +9143,6 @@
 		(uuid "6776918d-bd13-4956-bd07-1793b89ba16d")
 	)
 	(segment
-		(start 181.5 87.4)
-		(end 182.1 88)
-		(width 0.8)
-		(layer "F.Cu")
-		(net 2)
-		(uuid "696af02a-e8c0-4164-aa69-85219ab9aa41")
-	)
-	(segment
 		(start 182.1 107.164156)
 		(end 171.163156 118.101)
 		(width 0.8)
@@ -9075,6 +9199,14 @@
 		(uuid "ca2c8691-4df8-4b9f-ab3d-53a1961569c5")
 	)
 	(segment
+		(start 182.1 88)
+		(end 181.470001 87.370001)
+		(width 0.8)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "cc9d2fa7-e50b-4339-a76c-7b5dfdc38138")
+	)
+	(segment
 		(start 171.163156 118.101)
 		(end 163.336844 118.101)
 		(width 0.8)
@@ -9091,6 +9223,14 @@
 		(uuid "d23a7035-a234-47a7-82ff-d3983d5f2577")
 	)
 	(segment
+		(start 181.470001 87.370001)
+		(end 181.470001 79.816911)
+		(width 0.8)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "dc148035-3f21-4cc3-ac35-892808bea0ef")
+	)
+	(segment
 		(start 176.6 89.5)
 		(end 176.5 89.5)
 		(width 0.2)
@@ -9105,14 +9245,6 @@
 		(layer "F.Cu")
 		(net 2)
 		(uuid "dfd7973f-90f4-4fc4-8a0b-4391dd1cbb0e")
-	)
-	(segment
-		(start 181.5 79.5)
-		(end 181.5 87.4)
-		(width 0.8)
-		(layer "F.Cu")
-		(net 2)
-		(uuid "e28f7397-d559-4438-b0d9-571750609bc0")
 	)
 	(segment
 		(start 175.42 90.58)
@@ -9339,20 +9471,20 @@
 		(uuid "ff65b0dc-0a5f-462d-b918-a816d3688f42")
 	)
 	(segment
-		(start 179.5 71.9)
-		(end 179.5 79.5)
+		(start 179.470001 79.816911)
+		(end 179.470001 71.870001)
 		(width 0.8)
 		(layer "F.Cu")
 		(net 6)
-		(uuid "a57bfe5e-e2ea-4185-92b0-08ae13ad6dee")
+		(uuid "2dc3409d-5414-484d-b819-183083268ae8")
 	)
 	(segment
-		(start 178.1 70.5)
-		(end 179.5 71.9)
+		(start 179.470001 71.870001)
+		(end 178.1 70.5)
 		(width 0.8)
 		(layer "F.Cu")
 		(net 6)
-		(uuid "f1270ca2-e2a7-4ff6-b1df-24ec18fb081c")
+		(uuid "ae9cc16e-143f-4d5c-8f4c-538a43ecd79c")
 	)
 	(zone
 		(net 1)
@@ -9371,8 +9503,7 @@
 		)
 		(polygon
 			(pts
-				(xy 109.236784 45.311602) (xy 248.316784 50.601602) (xy 246.256784 155.331602) (xy 75.546784 149.701602)
-				(xy 89.156784 45.811602)
+				(xy 115.77 42.99) (xy 224.88 48.07) (xy 223.843216 137.208398) (xy 82.08 147.38) (xy 95.69 43.49)
 			)
 		)
 	)
