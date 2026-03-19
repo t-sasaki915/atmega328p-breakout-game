@@ -1,11 +1,12 @@
+#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
 
-#define BUTTON_MOVE_LEFT_PIN PORTC0
-#define BUTTON_MOVE_RIGHT_PIN PORTC1
+#define BUTTON_MOVE_LEFT_PIN PORTD3
+#define BUTTON_MOVE_RIGHT_PIN PORTD2
 
 #define MATRIX_LED_ROW_1_PIN PORTB0
 #define MATRIX_LED_ROW_2_PIN PORTB1
@@ -54,127 +55,129 @@ typedef enum
     UPDATE_TYPE_MOVE_PADDLE_RIGHT
 } UpdateType;
 
-void Initialise(GameState *gameState)
+static volatile GameState GAME_STATE;
+
+void Initialise(void)
 {
-    gameState->movingBallLocation.x = 0;
-    gameState->movingBallLocation.y = 1;
-    gameState->movingBallDirection = TOWARDS_UPRIGHT;
-    gameState->paddleLocation = 0;
+    GAME_STATE.movingBallLocation.x = 0;
+    GAME_STATE.movingBallLocation.y = 1;
+    GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+    GAME_STATE.paddleLocation = 0;
     for (int i = 0; i < 16; i++)
     {
-        gameState->remainingBalls[i].x = i % MATRIX_LED_WIDTH;
-        gameState->remainingBalls[i].y = (int8_t)i / MATRIX_LED_WIDTH;
+        GAME_STATE.remainingBalls[i].x = i % MATRIX_LED_WIDTH;
+        GAME_STATE.remainingBalls[i].y = (int8_t)i / MATRIX_LED_WIDTH;
     }
 }
 
-void MovePoint(Direction *direction, Point *point)
+void MoveBall()
 {
-    switch (*direction)
+    switch (GAME_STATE.movingBallDirection)
     {
         case TOWARDS_UPRIGHT: {
-            if (point->x < 7 && point->y < 7)
+            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y < 7)
             {
-                point->x++;
-                point->y++;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (point->x >= 7 && point->y < 7)
+            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *direction = TOWARDS_UPLEFT;
-                point->x--;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (point->x < 7 && point->y >= 7)
+            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y >= 7)
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                point->x++;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else // point->x >= 7 && point->y >= 7
+            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y >= 7
             {
-                *direction = TOWARDS_DOWNLEFT;
-                point->x--;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
 
             break;
         }
         case TOWARDS_UPLEFT: {
-            if (point->x > 0 && point->y < 7)
+            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y < 7)
             {
-                point->x--;
-                point->y++;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (point->x <= 0 && point->y < 7)
+            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *direction = TOWARDS_UPRIGHT;
-                point->x++;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (point->x > 0 && point->y >= 7)
+            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y >= 7)
             {
-                *direction = TOWARDS_DOWNLEFT;
-                point->x--;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else // point->x <= 0 && point->y >= 7
+            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y >= 7
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                point->x++;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
 
             break;
         }
         case TOWARDS_DOWNRIGHT: {
-            if (point->x < 7 && point->y > 0)
+            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y > 0)
             {
-                point->x++;
-                point->y--;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (point->x >= 7 && point->y > 0)
+            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *direction = TOWARDS_DOWNLEFT;
-                point->x--;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (point->x < 7 && point->y <= 0)
+            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y <= 0)
             {
-                *direction = TOWARDS_UPRIGHT;
-                point->x++;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else // point->x >= 7 && point->y <= 0
+            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y <= 0
             {
-                *direction = TOWARDS_UPLEFT;
-                point->x--;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
 
             break;
         }
         case TOWARDS_DOWNLEFT: {
-            if (point->x > 0 && point->y > 0)
+            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y > 0)
             {
-                point->x--;
-                point->y--;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (point->x <= 0 && point->y > 0)
+            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                point->x++;
-                point->y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (point->x > 0 && point->y <= 0)
+            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y <= 0)
             {
-                *direction = TOWARDS_UPLEFT;
-                point->x--;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else // point->x <= 0 && point->y <= 0
+            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y <= 0
             {
-                *direction = TOWARDS_UPRIGHT;
-                point->x++;
-                point->y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
 
             break;
@@ -182,58 +185,77 @@ void MovePoint(Direction *direction, Point *point)
     }
 }
 
-void Update(UpdateType updateType, GameState *gameState)
+void Update(UpdateType updateType)
 {
     switch (updateType)
     {
         case UPDATE_TYPE_TICK: {
-            MovePoint(&gameState->movingBallDirection, &gameState->movingBallLocation);
+            MoveBall();
 
             break;
         }
         case UPDATE_TYPE_MOVE_PADDLE_LEFT: {
-            if (gameState->paddleLocation <= 0)
+            if (GAME_STATE.paddleLocation <= 0)
             {
                 return;
             }
 
-            gameState->paddleLocation--;
+            GAME_STATE.paddleLocation--;
 
             break;
         }
         case UPDATE_TYPE_MOVE_PADDLE_RIGHT: {
-            if (gameState->paddleLocation >= MATRIX_LED_WIDTH - 1)
+            if (GAME_STATE.paddleLocation >= MATRIX_LED_WIDTH - 1)
             {
                 return;
             }
 
-            gameState->paddleLocation++;
+            GAME_STATE.paddleLocation++;
 
             break;
         }
     }
 }
 
-void View(GameState *gameState)
+void View(void)
 {
+}
+
+// MOVE_LEFT_SW
+ISR(INT1_vect)
+{
+    Update(UPDATE_TYPE_MOVE_PADDLE_LEFT);
+}
+
+// MOVE_RIGHT_SW
+ISR(INT0_vect)
+{
+    Update(UPDATE_TYPE_MOVE_PADDLE_RIGHT);
 }
 
 int main(void)
 {
-    // PORTB output
     DDRB = 0xFF;
-    // PORTC output
     DDRD = 0xFF;
-    // BUTTON_MOVE_LEFT_PIN BUTTON_MOVE_RIGHT_PIN input
-    DDRC &= ~(1 << BUTTON_MOVE_LEFT_PIN) | ~(1 << BUTTON_MOVE_RIGHT_PIN);
-    PORTC |= (1 << BUTTON_MOVE_LEFT_PIN) | (1 << BUTTON_MOVE_RIGHT_PIN);
+    DDRD &= ~((1 << BUTTON_MOVE_LEFT_PIN) | (1 << BUTTON_MOVE_RIGHT_PIN));
+    PORTD |= (1 << BUTTON_MOVE_LEFT_PIN) | (1 << BUTTON_MOVE_RIGHT_PIN);
 
-    GameState currentGameState;
-    Initialise(&currentGameState);
+    EICRA |= (1 << ISC01) | (1 << ISC11);
+    EICRA &= ~((1 << ISC00) | (1 << ISC10));
+
+    EIMSK |= (1 << INT0) | (1 << INT1);
+
+    sei();
+
+    Initialise();
 
     for (;;)
     {
-        View(&currentGameState);
+        Update(UPDATE_TYPE_TICK);
+
+        View();
+
+        _delay_ms(5);
     }
 
     return 0;

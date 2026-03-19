@@ -9057,7 +9057,7 @@
 		)
 		(uuid "ff38afaf-be51-472b-9968-86fe8a191c5c")
 	)
-	(label "PORTD2"
+	(label "PORTC4"
 		(at 233.68 86.36 0)
 		(effects
 			(font
@@ -9076,16 +9076,6 @@
 			(justify left bottom)
 		)
 		(uuid "04d6fe4c-5e2e-4130-8353-02d25dae4cbe")
-	)
-	(label "MOVE_RIGHT_SW"
-		(at 83.82 97.79 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "08e85830-ae32-4e4b-b53f-80af3f0ace9f")
 	)
 	(label "PORTD7"
 		(at 83.82 125.73 0)
@@ -9136,16 +9126,6 @@
 			(justify left bottom)
 		)
 		(uuid "1a5d6b40-4cca-4bf4-a879-fcc5ad941bba")
-	)
-	(label "MOVE_LEFT_SW"
-		(at 83.82 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "28e1981f-79e5-4253-9f4d-a118506e2a37")
 	)
 	(label "PORTD5"
 		(at 83.82 120.65 0)
@@ -9207,6 +9187,16 @@
 		)
 		(uuid "368d6539-045f-4391-a7c8-e610319d2dce")
 	)
+	(label "MOVE_RIGHT_SW"
+		(at 83.82 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "39fd56be-a964-430a-91d1-4f530d0b34e5")
+	)
 	(label "PORTB3"
 		(at 83.82 72.39 0)
 		(effects
@@ -9226,16 +9216,6 @@
 			(justify left bottom)
 		)
 		(uuid "4756f545-acc0-4dec-9244-d6459c5214a7")
-	)
-	(label "PORTD2"
-		(at 83.82 113.03 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "480655da-d69b-4061-99e7-d44fec830347")
 	)
 	(label "PORTD6"
 		(at 83.82 123.19 0)
@@ -9266,6 +9246,16 @@
 			(justify left bottom)
 		)
 		(uuid "5991efcd-11d7-495b-aa7d-53fcaf98db9d")
+	)
+	(label "PORTC5"
+		(at 83.82 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5befd854-eca9-47f7-bb03-341571f58a60")
 	)
 	(label "PORTD6"
 		(at 233.68 134.62 0)
@@ -9377,6 +9367,16 @@
 		)
 		(uuid "cd57b4a6-9e8a-4d07-beab-c94116d3d3ef")
 	)
+	(label "MOVE_LEFT_SW"
+		(at 83.82 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cee71141-48fb-474f-86aa-59ab2a01f7d4")
+	)
 	(label "PORTB5"
 		(at 123.19 142.24 0)
 		(effects
@@ -9387,7 +9387,7 @@
 		)
 		(uuid "d10f2c68-5a46-4098-b010-fcc8b18bdf0b")
 	)
-	(label "PORTD3"
+	(label "PORTC5"
 		(at 233.68 102.87 0)
 		(effects
 			(font
@@ -9396,6 +9396,16 @@
 			(justify left bottom)
 		)
 		(uuid "d54e103d-be37-4725-b1a8-b0fb30c0e761")
+	)
+	(label "PORTC4"
+		(at 83.82 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d6097639-affb-42f5-8f03-e6aa6b638916")
 	)
 	(label "PORTD0"
 		(at 83.82 107.95 0)
@@ -9406,16 +9416,6 @@
 			(justify left bottom)
 		)
 		(uuid "db3eff32-b466-40e9-9a2b-5e4425bf762a")
-	)
-	(label "PORTD3"
-		(at 83.82 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc44db2b-66a5-4c54-9d36-f60af78d5965")
 	)
 	(label "PORTD4"
 		(at 83.82 118.11 0)

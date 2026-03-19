@@ -3,6 +3,8 @@ CompileFlags:
     "-Wall",
     "-Wextra",
     "-Wpedantic",
+    "-Wno-unknown-attributes",
+    "-Wno-gnu-zero-variadic-macro-arguments",
     "-mmcu=atmega328p",
     "-DF_CPU=1000000UL",
     "--target=avr",
