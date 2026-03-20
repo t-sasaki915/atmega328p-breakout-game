@@ -46,6 +46,18 @@ typedef struct
     uint8_t bit;
 } PortConfig;
 
+#define HIGH_PORT(portConf)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        *(portConf.port) |= (1 << (portConf.bit));                                                                     \
+    } while (0)
+
+#define LOW_PORT(portConf)                                                                                             \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        *(portConf.port) &= ~(1 << (portConf.bit));                                                                    \
+    } while (0)
+
 static const PortConfig MATRIX_LED_COL_PINS[] = {
     {&PORTB, &DDRB, PORTB1}, // COL 1
     {&PORTB, &DDRB, PORTB1}, // COL 2
@@ -238,7 +250,11 @@ void Update(UpdateType updateType)
 // View timer
 ISR(TIMER1_COMPA_vect)
 {
-    *MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE].port &= ~(1 << MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE].bit);
+    LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
+    for (int i = 0; i < MATRIX_LED_WIDTH; i++)
+    {
+        LOW_PORT(MATRIX_LED_COL_PINS[i]);
+    }
 
     if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
     {
@@ -249,7 +265,12 @@ ISR(TIMER1_COMPA_vect)
         CURRENT_VIEW_LINE++;
     }
 
-    *MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE].port |= (1 << MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE].bit);
+    if (GAME_STATE.movingBallLocation.y == CURRENT_VIEW_LINE)
+    {
+        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.movingBallLocation.x]);
+    }
+
+    HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 }
 
 // MOVE_LEFT_SW
