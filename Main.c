@@ -46,17 +46,9 @@ typedef struct
     uint8_t bit;
 } PortConfig;
 
-#define HIGH_PORT(portConf)                                                                                            \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        *(portConf.port) |= (1 << (portConf.bit));                                                                     \
-    } while (0)
+#define HIGH_PORT(portConf) *(portConf.port) |= (1 << (portConf.bit))
 
-#define LOW_PORT(portConf)                                                                                             \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        *(portConf.port) &= ~(1 << (portConf.bit));                                                                    \
-    } while (0)
+#define LOW_PORT(portConf) *(portConf.port) &= ~(1 << (portConf.bit))
 
 static const PortConfig MATRIX_LED_COL_PINS[] = {
     {&PORTB, &DDRB, PORTB6}, // COL 1
