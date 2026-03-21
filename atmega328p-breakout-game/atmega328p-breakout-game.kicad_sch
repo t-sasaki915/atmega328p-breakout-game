@@ -9057,7 +9057,7 @@
 		)
 		(uuid "ff38afaf-be51-472b-9968-86fe8a191c5c")
 	)
-	(label "PORTC4"
+	(label "PORTC5"
 		(at 233.68 86.36 0)
 		(effects
 			(font
@@ -9087,7 +9087,7 @@
 		)
 		(uuid "14d3dfaa-4237-4fcf-939c-71ccb60710dd")
 	)
-	(label "PORTB0"
+	(label "PORTB5"
 		(at 123.19 74.93 0)
 		(effects
 			(font
@@ -9107,7 +9107,7 @@
 		)
 		(uuid "17b889b0-f8d2-4d71-b754-4368eda02623")
 	)
-	(label "PORTB1"
+	(label "PORTB4"
 		(at 123.19 92.71 0)
 		(effects
 			(font
@@ -9167,7 +9167,7 @@
 		)
 		(uuid "328b818e-aa51-4d06-aa8e-607968c10bfb")
 	)
-	(label "PORTD7"
+	(label "PORTD0"
 		(at 233.68 143.51 0)
 		(effects
 			(font
@@ -9177,7 +9177,7 @@
 		)
 		(uuid "3307c00a-fa8a-495d-b787-586684eec601")
 	)
-	(label "PORTB2"
+	(label "PORTD6"
 		(at 123.19 109.22 0)
 		(effects
 			(font
@@ -9257,7 +9257,7 @@
 		)
 		(uuid "5befd854-eca9-47f7-bb03-341571f58a60")
 	)
-	(label "PORTD6"
+	(label "PORTD1"
 		(at 233.68 134.62 0)
 		(effects
 			(font
@@ -9267,7 +9267,7 @@
 		)
 		(uuid "678a0f5a-bbd9-49ba-8b9b-6e1c5e70bf6e")
 	)
-	(label "PORTD4"
+	(label "PORTC4"
 		(at 233.68 111.76 0)
 		(effects
 			(font
@@ -9277,7 +9277,7 @@
 		)
 		(uuid "712b28e7-ccba-4064-80cd-1d0ff653a264")
 	)
-	(label "PORTD0"
+	(label "PORTD5"
 		(at 233.68 69.85 0)
 		(effects
 			(font
@@ -9287,7 +9287,7 @@
 		)
 		(uuid "74f089e0-59e1-481e-9507-619e8492b134")
 	)
-	(label "PORTB6"
+	(label "PORTB2"
 		(at 123.19 151.13 0)
 		(effects
 			(font
@@ -9297,7 +9297,7 @@
 		)
 		(uuid "928fb197-c648-4206-8f52-099e95b17c39")
 	)
-	(label "PORTB4"
+	(label "PORTB3"
 		(at 123.19 125.73 0)
 		(effects
 			(font
@@ -9317,7 +9317,7 @@
 		)
 		(uuid "a8b36384-0932-4f34-a702-ac05b583c3f1")
 	)
-	(label "PORTB7"
+	(label "PORTB1"
 		(at 123.19 168.91 0)
 		(effects
 			(font
@@ -9337,7 +9337,7 @@
 		)
 		(uuid "b5c3dd7b-af32-4d88-9ac5-4e7b69ddd726")
 	)
-	(label "PORTB3"
+	(label "PORTD7"
 		(at 123.19 116.84 0)
 		(effects
 			(font
@@ -9347,7 +9347,7 @@
 		)
 		(uuid "bf3ef112-5f51-4ac3-a292-96d8c4794e38")
 	)
-	(label "PORTD1"
+	(label "PORTB7"
 		(at 233.68 76.2 0)
 		(effects
 			(font
@@ -9377,7 +9377,7 @@
 		)
 		(uuid "cee71141-48fb-474f-86aa-59ab2a01f7d4")
 	)
-	(label "PORTB5"
+	(label "PORTB0"
 		(at 123.19 142.24 0)
 		(effects
 			(font
@@ -9387,7 +9387,7 @@
 		)
 		(uuid "d10f2c68-5a46-4098-b010-fcc8b18bdf0b")
 	)
-	(label "PORTC5"
+	(label "PORTB6"
 		(at 233.68 102.87 0)
 		(effects
 			(font
@@ -9427,7 +9427,7 @@
 		)
 		(uuid "e2ceb5fc-aea5-4020-84b1-da4b7c8cc33c")
 	)
-	(label "PORTD5"
+	(label "PORTD4"
 		(at 233.68 128.27 0)
 		(effects
 			(font
