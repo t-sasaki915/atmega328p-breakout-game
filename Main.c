@@ -59,25 +59,25 @@ typedef struct
     } while (0)
 
 static const PortConfig MATRIX_LED_COL_PINS[] = {
-    {&PORTB, &DDRB, PORTB1}, // COL 1
-    {&PORTB, &DDRB, PORTB1}, // COL 2
-    {&PORTB, &DDRB, PORTB1}, // COL 3
-    {&PORTB, &DDRB, PORTB1}, // COL 4
-    {&PORTB, &DDRB, PORTB1}, // COL 5
-    {&PORTB, &DDRB, PORTB1}, // COL 6
-    {&PORTB, &DDRB, PORTB1}, // COL 7
-    {&PORTB, &DDRB, PORTB1}  // COL 8
+    {&PORTB, &DDRB, PORTB6}, // COL 1
+    {&PORTD, &DDRD, PORTD6}, // COL 2
+    {&PORTD, &DDRD, PORTD7}, // COL 3
+    {&PORTD, &DDRD, PORTD1}, // COL 4
+    {&PORTB, &DDRB, PORTB0}, // COL 5
+    {&PORTD, &DDRD, PORTD4}, // COL 6
+    {&PORTB, &DDRB, PORTB7}, // COL 7
+    {&PORTD, &DDRD, PORTD5}  // COL 8
 };
 
 static const PortConfig MATRIX_LED_ROW_PINS[] = {
-    {&PORTB, &DDRB, PORTB1}, // ROW 1
-    {&PORTB, &DDRB, PORTB1}, // ROW 2
+    {&PORTD, &DDRD, PORTD0}, // ROW 1
+    {&PORTC, &DDRC, PORTC5}, // ROW 2
     {&PORTB, &DDRB, PORTB1}, // ROW 3
-    {&PORTB, &DDRB, PORTB1}, // ROW 4
-    {&PORTB, &DDRB, PORTB1}, // ROW 5
-    {&PORTB, &DDRB, PORTB1}, // ROW 6
-    {&PORTB, &DDRB, PORTB1}, // ROW 7
-    {&PORTB, &DDRB, PORTB1}  // ROW 8
+    {&PORTC, &DDRC, PORTC4}, // ROW 4
+    {&PORTB, &DDRB, PORTB5}, // ROW 5
+    {&PORTB, &DDRB, PORTB2}, // ROW 6
+    {&PORTB, &DDRB, PORTB4}, // ROW 7
+    {&PORTB, &DDRB, PORTB3}  // ROW 8
 };
 
 static volatile GameState GAME_STATE;
@@ -159,7 +159,7 @@ void MoveBall(void)
             break;
         }
         case TOWARDS_DOWNRIGHT: {
-            if (*x<MATRIX_LED_X_MAX && * y> 0)
+            if (*x < MATRIX_LED_X_MAX && *y > 0)
             {
                 *x++;
                 *y--;
