@@ -2,6 +2,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#define BALL_MAX 16
+
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
 #define MATRIX_LED_X_MAX 7
@@ -41,7 +43,7 @@ typedef struct
     Point movingBallLocation;
     BallDirection movingBallDirection;
     uint8_t paddleLocation;
-    Point remainingBalls[16];
+    Point remainingBalls[BALL_MAX];
     uint8_t isGameOver;
 } GameState;
 
@@ -95,10 +97,10 @@ void Initialise(void)
     GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
     GAME_STATE.paddleLocation = 0;
     GAME_STATE.isGameOver = 0;
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < BALL_MAX; i++)
     {
         GAME_STATE.remainingBalls[i].x = i % MATRIX_LED_WIDTH;
-        GAME_STATE.remainingBalls[i].y = (int8_t)i / MATRIX_LED_WIDTH;
+        GAME_STATE.remainingBalls[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
     }
 }
 
@@ -421,6 +423,13 @@ ISR(TIMER1_COMPA_vect)
         HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation]);
         HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation + 1]);
     }
+    /*for (int i = 0; i < BALL_MAX; i++)
+    {
+        if (CURRENT_VIEW_LINE == GAME_STATE.remainingBalls[i].y)
+        {
+            HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.remainingBalls[i].x]);
+        }
+    }*/
 
     LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 }

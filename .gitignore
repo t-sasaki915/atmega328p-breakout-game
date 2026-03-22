@@ -1,5 +1,6 @@
 *.elf
 *.hex
+*.s
 
 atmega328p-breakout-game/*.lck
 atmega328p-breakout-game/*.bak
