@@ -40,8 +40,9 @@ typedef struct
 {
     Point movingBallLocation;
     BallDirection movingBallDirection;
-    int8_t paddleLocation;
+    uint8_t paddleLocation;
     Point remainingBalls[16];
+    uint8_t isGameOver;
 } GameState;
 
 typedef enum
@@ -93,6 +94,7 @@ void Initialise(void)
     GAME_STATE.movingBallLocation.y = 1;
     GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
     GAME_STATE.paddleLocation = 0;
+    GAME_STATE.isGameOver = 0;
     for (int i = 0; i < 16; i++)
     {
         GAME_STATE.remainingBalls[i].x = i % MATRIX_LED_WIDTH;
@@ -254,7 +256,7 @@ void MoveBall(void)
 
     if (newPoint.y == 0)
     {
-        int8_t paddleLoc = GAME_STATE.paddleLocation;
+        uint8_t paddleLoc = GAME_STATE.paddleLocation;
 
         if (currentPoint.x == paddleLoc || currentPoint.x == paddleLoc + 1)
         {
@@ -276,6 +278,10 @@ void MoveBall(void)
 
                 isBounced = 1;
             }
+        }
+        else
+        {
+            GAME_STATE.isGameOver = 1;
         }
     }
 
@@ -353,6 +359,11 @@ void MoveBall(void)
 
 void Update(UpdateType updateType)
 {
+    if (GAME_STATE.isGameOver != 0)
+    {
+        return;
+    }
+
     switch (updateType)
     {
         case UPDATE_TYPE_TICK: {
