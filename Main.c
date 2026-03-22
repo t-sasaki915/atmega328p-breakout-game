@@ -247,9 +247,42 @@ Point NextMovingBallPoint(BallDirection direction)
 void MoveBall(void)
 {
     BallDirection newBallDirection = GAME_STATE.movingBallDirection;
+    Point currentPoint = GAME_STATE.movingBallLocation;
     Point newPoint = NextMovingBallPoint(newBallDirection);
 
     uint8_t isBounced = 0;
+
+    if (newPoint.y == 0)
+    {
+        int8_t paddleLoc = GAME_STATE.paddleLocation;
+
+        if (currentPoint.x == paddleLoc || currentPoint.x == paddleLoc + 1)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWN);
+
+            isBounced = 1;
+        }
+        else if (newPoint.x == paddleLoc || newPoint.x == paddleLoc + 1)
+        {
+            if (newBallDirection == TOWARDS_DOWNLEFT)
+            {
+                BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
+
+                isBounced = 1;
+            }
+            else if (newBallDirection == TOWARDS_DOWNRIGHT)
+            {
+                BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
+
+                isBounced = 1;
+            }
+        }
+    }
+
+    if (isBounced != 0)
+    {
+        newPoint = NextMovingBallPoint(newBallDirection);
+    }
 
     if (newPoint.y > MATRIX_LED_Y_MAX)
     {
@@ -304,27 +337,6 @@ void MoveBall(void)
         else if (newPoint.x < 0)
         {
             BounceBallDirection(&newBallDirection, DIRECTION_LEFT);
-
-            isBounced = 1;
-        }
-    }
-
-    if (isBounced != 0)
-    {
-        newPoint = NextMovingBallPoint(newBallDirection);
-    }
-
-    if (newPoint.y == 0 && (newPoint.x == GAME_STATE.paddleLocation || newPoint.x == GAME_STATE.paddleLocation + 1))
-    {
-        if (newBallDirection == TOWARDS_DOWNLEFT)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
-
-            isBounced = 1;
-        }
-        else if (newBallDirection == TOWARDS_DOWNRIGHT)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
 
             isBounced = 1;
         }
