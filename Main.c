@@ -22,12 +22,24 @@ typedef enum
     TOWARDS_UPLEFT,
     TOWARDS_DOWNRIGHT,
     TOWARDS_DOWNLEFT
+} BallDirection;
+
+typedef enum
+{
+    DIRECTION_TOP,
+    DIRECTION_DOWN,
+    DIRECTION_LEFT,
+    DIRECTION_RIGHT,
+    DIRECTION_TOPRIGHT,
+    DIRECTION_TOPLEFT,
+    DIRECTION_DOWNRIGHT,
+    DIRECTION_DOWNLEFT
 } Direction;
 
 typedef struct
 {
     Point movingBallLocation;
-    Direction movingBallDirection;
+    BallDirection movingBallDirection;
     int8_t paddleLocation;
     Point remainingBalls[16];
 } GameState;
@@ -88,119 +100,243 @@ void Initialise(void)
     }
 }
 
-void MoveBall(void)
+void BounceBallDirection(BallDirection *ballDirection, Direction obstacleDirection)
 {
-    switch (GAME_STATE.movingBallDirection)
+    switch (*ballDirection)
     {
         case TOWARDS_UPRIGHT: {
-            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y < 7)
+            switch (obstacleDirection)
             {
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y < 7)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y >= 7)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y >= 7
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y--;
+                case DIRECTION_RIGHT: {
+                    *ballDirection = TOWARDS_UPLEFT;
+
+                    break;
+                }
+                case DIRECTION_TOP: {
+                    *ballDirection = TOWARDS_DOWNRIGHT;
+
+                    break;
+                }
+                case DIRECTION_TOPRIGHT: {
+                    *ballDirection = TOWARDS_DOWNLEFT;
+
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
 
             break;
         }
         case TOWARDS_UPLEFT: {
-            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y < 7)
+            switch (obstacleDirection)
             {
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y < 7)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y >= 7)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y >= 7
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y--;
+                case DIRECTION_LEFT: {
+                    *ballDirection = TOWARDS_UPRIGHT;
+
+                    break;
+                }
+                case DIRECTION_TOP: {
+                    *ballDirection = TOWARDS_DOWNLEFT;
+
+                    break;
+                }
+                case DIRECTION_TOPLEFT: {
+                    *ballDirection = TOWARDS_DOWNRIGHT;
+
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
 
             break;
         }
         case TOWARDS_DOWNRIGHT: {
-            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y > 0)
+            switch (obstacleDirection)
             {
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y > 0)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y <= 0)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y <= 0
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y++;
+                case DIRECTION_RIGHT: {
+                    *ballDirection = TOWARDS_DOWNLEFT;
+
+                    break;
+                }
+                case DIRECTION_DOWN: {
+                    *ballDirection = TOWARDS_UPRIGHT;
+
+                    break;
+                }
+                case DIRECTION_DOWNRIGHT: {
+                    *ballDirection = TOWARDS_UPLEFT;
+
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
 
             break;
         }
         case TOWARDS_DOWNLEFT: {
-            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y > 0)
+            switch (obstacleDirection)
             {
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y > 0)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y--;
-            }
-            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y <= 0)
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
-                GAME_STATE.movingBallLocation.x--;
-                GAME_STATE.movingBallLocation.y++;
-            }
-            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y <= 0
-            {
-                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
-                GAME_STATE.movingBallLocation.x++;
-                GAME_STATE.movingBallLocation.y++;
+                case DIRECTION_LEFT: {
+                    *ballDirection = TOWARDS_DOWNRIGHT;
+
+                    break;
+                }
+                case DIRECTION_DOWN: {
+                    *ballDirection = TOWARDS_UPLEFT;
+
+                    break;
+                }
+                case DIRECTION_DOWNLEFT: {
+                    *ballDirection = TOWARDS_UPRIGHT;
+
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
 
             break;
         }
     }
+}
+
+Point NextMovingBallPoint(BallDirection direction)
+{
+    Point newPoint;
+    newPoint.x = GAME_STATE.movingBallLocation.x;
+    newPoint.y = GAME_STATE.movingBallLocation.y;
+
+    switch (direction)
+    {
+        case TOWARDS_UPRIGHT: {
+            newPoint.x++;
+            newPoint.y++;
+
+            break;
+        }
+        case TOWARDS_UPLEFT: {
+            newPoint.x--;
+            newPoint.y++;
+
+            break;
+        }
+        case TOWARDS_DOWNRIGHT: {
+            newPoint.x++;
+            newPoint.y--;
+
+            break;
+        }
+        case TOWARDS_DOWNLEFT: {
+            newPoint.x--;
+            newPoint.y--;
+
+            break;
+        }
+    }
+
+    return newPoint;
+}
+
+void MoveBall(void)
+{
+    BallDirection newBallDirection = GAME_STATE.movingBallDirection;
+    Point newPoint = NextMovingBallPoint(newBallDirection);
+
+    uint8_t isBounced = 0;
+
+    if (newPoint.y > MATRIX_LED_Y_MAX)
+    {
+        if (newPoint.x > MATRIX_LED_X_MAX)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_TOPRIGHT);
+
+            isBounced = 1;
+        }
+        else if (newPoint.x < 0)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_TOPLEFT);
+
+            isBounced = 1;
+        }
+        else
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_TOP);
+
+            isBounced = 1;
+        }
+    }
+    else if (newPoint.y < 0)
+    {
+        if (newPoint.x > MATRIX_LED_X_MAX)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
+
+            isBounced = 1;
+        }
+        else if (newPoint.x < 0)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
+
+            isBounced = 1;
+        }
+        else
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWN);
+
+            isBounced = 1;
+        }
+    }
+    else
+    {
+        if (newPoint.x > MATRIX_LED_X_MAX)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_RIGHT);
+
+            isBounced = 1;
+        }
+        else if (newPoint.x < 0)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_LEFT);
+
+            isBounced = 1;
+        }
+    }
+
+    if (isBounced != 0)
+    {
+        newPoint = NextMovingBallPoint(newBallDirection);
+    }
+
+    if (newPoint.y == 0 && (newPoint.x == GAME_STATE.paddleLocation || newPoint.x == GAME_STATE.paddleLocation + 1))
+    {
+        if (newBallDirection == TOWARDS_DOWNLEFT)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
+
+            isBounced = 1;
+        }
+        else if (newBallDirection == TOWARDS_DOWNRIGHT)
+        {
+            BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
+
+            isBounced = 1;
+        }
+    }
+
+    if (isBounced != 0)
+    {
+        newPoint = NextMovingBallPoint(newBallDirection);
+    }
+
+    GAME_STATE.movingBallLocation = newPoint;
+    GAME_STATE.movingBallDirection = newBallDirection;
 }
 
 void Update(UpdateType updateType)
