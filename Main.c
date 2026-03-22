@@ -62,14 +62,14 @@ static const PortConfig MATRIX_LED_COL_PINS[] = {
 };
 
 static const PortConfig MATRIX_LED_ROW_PINS[] = {
-    {&PORTD, &DDRD, PORTD0}, // ROW 1
-    {&PORTC, &DDRC, PORTC5}, // ROW 2
-    {&PORTB, &DDRB, PORTB1}, // ROW 3
-    {&PORTC, &DDRC, PORTC4}, // ROW 4
-    {&PORTB, &DDRB, PORTB5}, // ROW 5
-    {&PORTB, &DDRB, PORTB2}, // ROW 6
+    {&PORTB, &DDRB, PORTB3}, // ROW 8
     {&PORTB, &DDRB, PORTB4}, // ROW 7
-    {&PORTB, &DDRB, PORTB3}  // ROW 8
+    {&PORTB, &DDRB, PORTB2}, // ROW 6
+    {&PORTB, &DDRB, PORTB5}, // ROW 5
+    {&PORTC, &DDRC, PORTC4}, // ROW 4
+    {&PORTB, &DDRB, PORTB1}, // ROW 3
+    {&PORTC, &DDRC, PORTC5}, // ROW 2
+    {&PORTD, &DDRD, PORTD0}  // ROW 1
 };
 
 static volatile GameState GAME_STATE;
@@ -90,116 +90,112 @@ void Initialise(void)
 
 void MoveBall(void)
 {
-    volatile int8_t *x = &GAME_STATE.movingBallLocation.x;
-    volatile int8_t *y = &GAME_STATE.movingBallLocation.y;
-    volatile Direction *direction = &GAME_STATE.movingBallDirection;
-
-    switch (*direction)
+    switch (GAME_STATE.movingBallDirection)
     {
         case TOWARDS_UPRIGHT: {
-            if (*x < MATRIX_LED_X_MAX && *y < MATRIX_LED_X_MAX)
+            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *x++;
-                *y++;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (*x >= MATRIX_LED_X_MAX && *y < MATRIX_LED_X_MAX)
+            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *direction = TOWARDS_UPLEFT;
-                *x--;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (*x < MATRIX_LED_X_MAX && *y >= MATRIX_LED_X_MAX)
+            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y >= 7)
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                *x++;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else // *x >= MATRIX_LED_X_MAX && *y >= MATRIX_LED_X_MAX
+            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y >= 7
             {
-                *direction = TOWARDS_DOWNLEFT;
-                *x--;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
 
             break;
         }
         case TOWARDS_UPLEFT: {
-            if (*x > 0 && *y < MATRIX_LED_X_MAX)
+            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *x--;
-                *y++;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (*x <= 0 && *y < MATRIX_LED_X_MAX)
+            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y < 7)
             {
-                *direction = TOWARDS_UPRIGHT;
-                *x++;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else if (*x > 0 && *y >= MATRIX_LED_X_MAX)
+            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y >= 7)
             {
-                *direction = TOWARDS_DOWNLEFT;
-                *x--;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else // *x <= 0 && *y >= MATRIX_LED_X_MAX
+            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y >= 7
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                *x++;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
 
             break;
         }
         case TOWARDS_DOWNRIGHT: {
-            if (*x < MATRIX_LED_X_MAX && *y > 0)
+            if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *x++;
-                *y--;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (*x >= MATRIX_LED_X_MAX && *y > 0)
+            else if (GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *direction = TOWARDS_DOWNLEFT;
-                *x--;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (*x < MATRIX_LED_X_MAX && *y <= 0)
+            else if (GAME_STATE.movingBallLocation.x < 7 && GAME_STATE.movingBallLocation.y <= 0)
             {
-                *direction = TOWARDS_UPRIGHT;
-                *x++;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else // *x >= MATRIX_LED_X_MAX && *y <= 0
+            else // GAME_STATE.movingBallLocation.x >= 7 && GAME_STATE.movingBallLocation.y <= 0
             {
-                *direction = TOWARDS_UPLEFT;
-                *x--;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
 
             break;
         }
         case TOWARDS_DOWNLEFT: {
-            if (*x > 0 && *y > 0)
+            if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *x--;
-                *y--;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (*x <= 0 && *y > 0)
+            else if (GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y > 0)
             {
-                *direction = TOWARDS_DOWNRIGHT;
-                *x++;
-                *y--;
+                GAME_STATE.movingBallDirection = TOWARDS_DOWNRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y--;
             }
-            else if (*x > 0 && *y <= 0)
+            else if (GAME_STATE.movingBallLocation.x > 0 && GAME_STATE.movingBallLocation.y <= 0)
             {
-                *direction = TOWARDS_UPLEFT;
-                *x--;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPLEFT;
+                GAME_STATE.movingBallLocation.x--;
+                GAME_STATE.movingBallLocation.y++;
             }
-            else // *x <= 0 && *y <= 0
+            else // GAME_STATE.movingBallLocation.x <= 0 && GAME_STATE.movingBallLocation.y <= 0
             {
-                *direction = TOWARDS_UPRIGHT;
-                *x++;
-                *y++;
+                GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
+                GAME_STATE.movingBallLocation.x++;
+                GAME_STATE.movingBallLocation.y++;
             }
 
             break;
@@ -227,7 +223,7 @@ void Update(UpdateType updateType)
             break;
         }
         case UPDATE_TYPE_MOVE_PADDLE_RIGHT: {
-            if (GAME_STATE.paddleLocation >= MATRIX_LED_WIDTH - 1)
+            if (GAME_STATE.paddleLocation >= MATRIX_LED_X_MAX - 1)
             {
                 return;
             }
@@ -242,7 +238,7 @@ void Update(UpdateType updateType)
 // View timer
 ISR(TIMER1_COMPA_vect)
 {
-    LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
+    HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
     for (int i = 0; i < MATRIX_LED_WIDTH; i++)
     {
         LOW_PORT(MATRIX_LED_COL_PINS[i]);
@@ -257,12 +253,17 @@ ISR(TIMER1_COMPA_vect)
         CURRENT_VIEW_LINE++;
     }
 
-    if (GAME_STATE.movingBallLocation.y == CURRENT_VIEW_LINE)
+    if (CURRENT_VIEW_LINE == GAME_STATE.movingBallLocation.y)
     {
         HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.movingBallLocation.x]);
     }
+    if (CURRENT_VIEW_LINE == 0)
+    {
+        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation]);
+        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation + 1]);
+    }
 
-    HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
+    LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 }
 
 // MOVE_LEFT_SW
@@ -303,6 +304,11 @@ int main(void)
         *MATRIX_LED_ROW_PINS[i].ddr |= (1 << MATRIX_LED_ROW_PINS[i].bit);
     }
 
+    for (int i = 0; i < MATRIX_LED_HEIGHT; i++)
+    {
+        HIGH_PORT(MATRIX_LED_ROW_PINS[i]);
+    }
+
     DDRD &= ~((1 << BUTTON_MOVE_RIGHT_PIN) | (1 << BUTTON_MOVE_LEFT_PIN));
     PORTD |= (1 << BUTTON_MOVE_RIGHT_PIN) | (1 << BUTTON_MOVE_LEFT_PIN);
 
@@ -316,8 +322,7 @@ int main(void)
     for (;;)
     {
         Update(UPDATE_TYPE_TICK);
-
-        _delay_ms(5);
+        _delay_ms(50);
     }
 
     return 0;
