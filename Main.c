@@ -40,15 +40,6 @@ typedef enum
 
 typedef struct
 {
-    Point movingBallLocation;
-    BallDirection movingBallDirection;
-    uint8_t paddleLocation;
-    Point remainingBalls[BALL_MAX];
-    uint8_t isGameOver;
-} GameState;
-
-typedef struct
-{
     volatile uint8_t *port;
     volatile uint8_t *ddr;
     uint8_t bit;
