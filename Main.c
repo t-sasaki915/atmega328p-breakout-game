@@ -366,7 +366,7 @@ ISR(TIMER1_COMPA_vect)
 
     if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
     {
-        HIGH_PORT(MATRIX_LED_ROW_PINS[MATRIX_LED_Y_MAX]);
+        LOW_PORT(MATRIX_LED_ROW_PINS[MATRIX_LED_Y_MAX]);
 
         CURRENT_VIEW_LINE = 0;
         VBLANK = 1;
@@ -376,7 +376,7 @@ ISR(TIMER1_COMPA_vect)
 
     if (CURRENT_VIEW_LINE != 0)
     {
-        HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
+        LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
     }
 
     for (int i = 0; i < MATRIX_LED_WIDTH; i++)
@@ -391,7 +391,7 @@ ISR(TIMER1_COMPA_vect)
         }
     }
 
-    LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
+    HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 
     CURRENT_VIEW_LINE++;
 }
@@ -454,11 +454,6 @@ int main(void)
         *MATRIX_LED_ROW_PINS[i].ddr |= (1 << MATRIX_LED_ROW_PINS[i].bit);
     }
 
-    for (int i = 0; i < MATRIX_LED_HEIGHT; i++)
-    {
-        HIGH_PORT(MATRIX_LED_ROW_PINS[i]);
-    }
-
     DDRD &= ~((1 << BUTTON_MOVE_RIGHT_PIN) | (1 << BUTTON_MOVE_LEFT_PIN));
     PORTD |= (1 << BUTTON_MOVE_RIGHT_PIN) | (1 << BUTTON_MOVE_LEFT_PIN);
 
@@ -488,9 +483,9 @@ int main(void)
             UpdateVRAM();
 
             VBLANK = 0;
-        }
 
-        _delay_ms(10);
+            _delay_ms(50);
+        }
     }
 
     return 0;
