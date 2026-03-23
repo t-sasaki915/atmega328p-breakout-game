@@ -80,24 +80,15 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
     {&PORTD, &DDRD, PORTD0}  // ROW 1
 };
 
-static volatile GameState GAME_STATE;
+static volatile Point MOVING_BALL_LOCATION = {0, 1};
+static volatile BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
+static volatile uint8_t PADDLE_POSITION = 0;
+static volatile Point REMAINING_BALLS[BALL_MAX];
+static volatile uint8_t IS_GAMEOVER = 0;
+
 static volatile uint8_t VRAM[8];
 static volatile uint8_t VBLANK = 0;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
-
-void Initialise(void)
-{
-    GAME_STATE.movingBallLocation.x = 0;
-    GAME_STATE.movingBallLocation.y = 1;
-    GAME_STATE.movingBallDirection = TOWARDS_UPRIGHT;
-    GAME_STATE.paddleLocation = 0;
-    GAME_STATE.isGameOver = 0;
-    for (int i = 0; i < BALL_MAX; i++)
-    {
-        GAME_STATE.remainingBalls[i].x = i % MATRIX_LED_WIDTH;
-        GAME_STATE.remainingBalls[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
-    }
-}
 
 void BounceBallDirection(BallDirection *ballDirection, Direction obstacleDirection)
 {
@@ -209,8 +200,8 @@ void BounceBallDirection(BallDirection *ballDirection, Direction obstacleDirecti
 Point NextMovingBallPoint(BallDirection direction)
 {
     Point newPoint;
-    newPoint.x = GAME_STATE.movingBallLocation.x;
-    newPoint.y = GAME_STATE.movingBallLocation.y;
+    newPoint.x = MOVING_BALL_LOCATION.x;
+    newPoint.y = MOVING_BALL_LOCATION.y;
 
     switch (direction)
     {
@@ -245,23 +236,21 @@ Point NextMovingBallPoint(BallDirection direction)
 
 void MoveBall(void)
 {
-    BallDirection newBallDirection = GAME_STATE.movingBallDirection;
-    Point currentPoint = GAME_STATE.movingBallLocation;
+    BallDirection newBallDirection = MOVING_BALL_DIRECTION;
+    Point currentPoint = MOVING_BALL_LOCATION;
     Point newPoint = NextMovingBallPoint(newBallDirection);
 
     uint8_t isBounced = 0;
 
     if (newPoint.y == 0)
     {
-        uint8_t paddleLoc = GAME_STATE.paddleLocation;
-
-        if (currentPoint.x == paddleLoc || currentPoint.x == paddleLoc + 1)
+        if (currentPoint.x == PADDLE_POSITION || currentPoint.x == PADDLE_POSITION + 1)
         {
             BounceBallDirection(&newBallDirection, DIRECTION_DOWN);
 
             isBounced = 1;
         }
-        else if (newPoint.x == paddleLoc || newPoint.x == paddleLoc + 1)
+        else if (newPoint.x == PADDLE_POSITION || newPoint.x == PADDLE_POSITION + 1)
         {
             if (newBallDirection == TOWARDS_DOWNLEFT)
             {
@@ -278,7 +267,7 @@ void MoveBall(void)
         }
         else
         {
-            GAME_STATE.isGameOver = 1;
+            IS_GAMEOVER = 1;
         }
     }
 
@@ -350,8 +339,8 @@ void MoveBall(void)
         newPoint = NextMovingBallPoint(newBallDirection);
     }
 
-    GAME_STATE.movingBallLocation = newPoint;
-    GAME_STATE.movingBallDirection = newBallDirection;
+    MOVING_BALL_LOCATION = newPoint;
+    MOVING_BALL_DIRECTION = newBallDirection;
 }
 
 void UpdateVRAM(void)
@@ -361,13 +350,13 @@ void UpdateVRAM(void)
         VRAM[i] = 0;
     }
 
-    VRAM[GAME_STATE.movingBallLocation.y] |= (1 << GAME_STATE.movingBallLocation.x);
+    VRAM[MOVING_BALL_LOCATION.y] |= (1 << MOVING_BALL_LOCATION.x);
 
-    VRAM[0] |= (1 << GAME_STATE.paddleLocation) | (1 << (GAME_STATE.paddleLocation + 1));
+    VRAM[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
     for (int i = 0; i < BALL_MAX; i++)
     {
-        VRAM[GAME_STATE.remainingBalls[i].y] |= (1 << GAME_STATE.remainingBalls[i].x);
+        VRAM[REMAINING_BALLS[i].y] |= (1 << REMAINING_BALLS[i].x);
     }
 }
 
@@ -414,33 +403,33 @@ ISR(TIMER1_COMPA_vect)
 // MOVE_LEFT_SW
 ISR(INT1_vect)
 {
-    if (GAME_STATE.isGameOver)
+    if (IS_GAMEOVER)
     {
         return;
     }
 
-    if (GAME_STATE.paddleLocation <= 0)
+    if (PADDLE_POSITION <= 0)
     {
         return;
     }
 
-    GAME_STATE.paddleLocation--;
+    PADDLE_POSITION--;
 }
 
 // MOVE_RIGHT_SW
 ISR(INT0_vect)
 {
-    if (GAME_STATE.isGameOver)
+    if (IS_GAMEOVER)
     {
         return;
     }
 
-    if (GAME_STATE.paddleLocation >= MATRIX_LED_X_MAX - 1)
+    if (PADDLE_POSITION >= MATRIX_LED_X_MAX - 1)
     {
         return;
     }
 
-    GAME_STATE.paddleLocation++;
+    PADDLE_POSITION++;
 }
 
 void InitInterruption(void)
@@ -482,13 +471,17 @@ int main(void)
 
     sei();
 
-    Initialise();
+    for (int i = 0; i < BALL_MAX; i++)
+    {
+        REMAINING_BALLS[i].x = i % MATRIX_LED_WIDTH;
+        REMAINING_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
+    }
 
     UpdateVRAM();
 
     for (;;)
     {
-        if (GAME_STATE.isGameOver)
+        if (IS_GAMEOVER)
         {
             break;
         }
