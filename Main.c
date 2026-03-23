@@ -47,13 +47,6 @@ typedef struct
     uint8_t isGameOver;
 } GameState;
 
-typedef enum
-{
-    UPDATE_TYPE_TICK,
-    UPDATE_TYPE_MOVE_PADDLE_LEFT,
-    UPDATE_TYPE_MOVE_PADDLE_RIGHT
-} UpdateType;
-
 typedef struct
 {
     volatile uint8_t *port;
@@ -88,6 +81,8 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
 };
 
 static volatile GameState GAME_STATE;
+static volatile uint8_t VRAM[8];
+static volatile uint8_t VBLANK = 0;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
 
 void Initialise(void)
@@ -359,77 +354,52 @@ void MoveBall(void)
     GAME_STATE.movingBallDirection = newBallDirection;
 }
 
-void Update(UpdateType updateType)
+void UpdateVRAM(void)
 {
-    if (GAME_STATE.isGameOver != 0)
+    for (int i = 0; i < 8; i++)
     {
-        return;
+        VRAM[i] = 0;
     }
 
-    switch (updateType)
+    VRAM[GAME_STATE.movingBallLocation.y] |= (1 << GAME_STATE.movingBallLocation.x);
+
+    VRAM[0] |= (1 << GAME_STATE.paddleLocation) | (1 << (GAME_STATE.paddleLocation + 1));
+
+    for (int i = 0; i < BALL_MAX; i++)
     {
-        case UPDATE_TYPE_TICK: {
-            MoveBall();
-
-            break;
-        }
-        case UPDATE_TYPE_MOVE_PADDLE_LEFT: {
-            if (GAME_STATE.paddleLocation <= 0)
-            {
-                return;
-            }
-
-            GAME_STATE.paddleLocation--;
-
-            break;
-        }
-        case UPDATE_TYPE_MOVE_PADDLE_RIGHT: {
-            if (GAME_STATE.paddleLocation >= MATRIX_LED_X_MAX - 1)
-            {
-                return;
-            }
-
-            GAME_STATE.paddleLocation++;
-
-            break;
-        }
+        VRAM[GAME_STATE.remainingBalls[i].y] |= (1 << GAME_STATE.remainingBalls[i].x);
     }
 }
 
 // View timer
 ISR(TIMER1_COMPA_vect)
 {
-    HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
-    for (int i = 0; i < MATRIX_LED_WIDTH; i++)
-    {
-        LOW_PORT(MATRIX_LED_COL_PINS[i]);
-    }
-
     if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
     {
         CURRENT_VIEW_LINE = 0;
-    }
-    else
-    {
-        CURRENT_VIEW_LINE++;
+        VBLANK = 1;
+
+        return;
     }
 
-    if (CURRENT_VIEW_LINE == GAME_STATE.movingBallLocation.y)
+    if (CURRENT_VIEW_LINE > 0)
     {
-        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.movingBallLocation.x]);
+        HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
     }
-    if (CURRENT_VIEW_LINE == 0)
+
+    CURRENT_VIEW_LINE++;
+
+    for (int i = 0; i < MATRIX_LED_WIDTH; i++)
     {
-        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation]);
-        HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.paddleLocation + 1]);
-    }
-    /*for (int i = 0; i < BALL_MAX; i++)
-    {
-        if (CURRENT_VIEW_LINE == GAME_STATE.remainingBalls[i].y)
+        if (VRAM[CURRENT_VIEW_LINE] & (1 << i))
         {
-            HIGH_PORT(MATRIX_LED_COL_PINS[GAME_STATE.remainingBalls[i].x]);
+            HIGH_PORT(MATRIX_LED_COL_PINS[i]);
         }
-    }*/
+        else
+        {
+            LOW_PORT(MATRIX_LED_COL_PINS[i]);
+        }
+    }
 
     LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 }
@@ -437,13 +407,33 @@ ISR(TIMER1_COMPA_vect)
 // MOVE_LEFT_SW
 ISR(INT1_vect)
 {
-    Update(UPDATE_TYPE_MOVE_PADDLE_LEFT);
+    if (GAME_STATE.isGameOver)
+    {
+        return;
+    }
+
+    if (GAME_STATE.paddleLocation <= 0)
+    {
+        return;
+    }
+
+    GAME_STATE.paddleLocation--;
 }
 
 // MOVE_RIGHT_SW
 ISR(INT0_vect)
 {
-    Update(UPDATE_TYPE_MOVE_PADDLE_RIGHT);
+    if (GAME_STATE.isGameOver)
+    {
+        return;
+    }
+
+    if (GAME_STATE.paddleLocation >= MATRIX_LED_X_MAX - 1)
+    {
+        return;
+    }
+
+    GAME_STATE.paddleLocation++;
 }
 
 void InitInterruption(void)
@@ -487,10 +477,22 @@ int main(void)
 
     Initialise();
 
+    UpdateVRAM();
+
     for (;;)
     {
-        Update(UPDATE_TYPE_TICK);
-        _delay_ms(50);
+        if (GAME_STATE.isGameOver)
+        {
+            break;
+        }
+
+        if (VBLANK)
+        {
+            MoveBall();
+            UpdateVRAM();
+        }
+
+        _delay_ms(10);
     }
 
     return 0;
