@@ -77,8 +77,10 @@ static Point TARGET_BALLS[BALL_MAX];
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
-static volatile uint8_t VRAM[8];
-static volatile uint8_t VBLANK = 0;
+static volatile uint8_t VRAM_1[8];
+static volatile uint8_t VRAM_2[8];
+static volatile uint8_t *VRAM_DISPLAY = VRAM_1;
+static volatile uint8_t *VRAM_TEMP = VRAM_2;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
 
 void BounceBallDirection(BallDirection *ballDirection, Direction obstacleDirection)
@@ -338,12 +340,12 @@ void UpdateVRAM(void)
 {
     for (int i = 0; i < 8; i++)
     {
-        VRAM[i] = 0;
+        VRAM_TEMP[i] = 0;
     }
 
-    VRAM[MOVING_BALL_LOCATION.y] |= (1 << MOVING_BALL_LOCATION.x);
+    VRAM_TEMP[MOVING_BALL_LOCATION.y] |= (1 << MOVING_BALL_LOCATION.x);
 
-    VRAM[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
+    VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
     for (int i = 0; i < BALL_MAX; i++)
     {
@@ -352,36 +354,29 @@ void UpdateVRAM(void)
             continue;
         }
 
-        VRAM[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
+        VRAM_TEMP[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
     }
+
+    volatile uint8_t *temp = VRAM_DISPLAY;
+    VRAM_DISPLAY = VRAM_TEMP;
+    VRAM_TEMP = temp;
 }
 
 // View timer
 ISR(TIMER1_COMPA_vect)
 {
-    if (VBLANK)
-    {
-        return;
-    }
-
-    if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
+    if (CURRENT_VIEW_LINE == 0)
     {
         LOW_PORT(MATRIX_LED_ROW_PINS[MATRIX_LED_Y_MAX]);
-
-        CURRENT_VIEW_LINE = 0;
-        VBLANK = 1;
-
-        return;
     }
-
-    if (CURRENT_VIEW_LINE != 0)
+    else
     {
         LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
     }
 
     for (int i = 0; i < MATRIX_LED_WIDTH; i++)
     {
-        if (VRAM[CURRENT_VIEW_LINE] & (1 << i))
+        if (VRAM_DISPLAY[CURRENT_VIEW_LINE] & (1 << i))
         {
             HIGH_PORT(MATRIX_LED_COL_PINS[i]);
         }
@@ -393,7 +388,14 @@ ISR(TIMER1_COMPA_vect)
 
     HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 
-    CURRENT_VIEW_LINE++;
+    if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
+    {
+        CURRENT_VIEW_LINE = 0;
+    }
+    else
+    {
+        CURRENT_VIEW_LINE++;
+    }
 }
 
 // MOVE_LEFT_SW
@@ -472,20 +474,13 @@ int main(void)
 
     for (;;)
     {
-        if (IS_GAMEOVER)
-        {
-            break;
-        }
-
-        if (VBLANK)
+        if (!IS_GAMEOVER)
         {
             MoveBall();
             UpdateVRAM();
-
-            VBLANK = 0;
-
-            _delay_ms(50);
         }
+
+        _delay_ms(10);
     }
 
     return 0;
