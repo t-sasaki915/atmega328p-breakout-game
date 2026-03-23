@@ -74,7 +74,7 @@
 			(mirror no)
 			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "C:/Users/tsasaki/Desktop/New folder/")
+			(outputdirectory "")
 		)
 	)
 	(net 0 "")
