@@ -73,7 +73,7 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
 
 static Point MOVING_BALL_LOCATION = {0, 1};
 static BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
-static Point REMAINING_BALLS[BALL_MAX];
+static Point TARGET_BALLS[BALL_MAX];
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
@@ -347,7 +347,12 @@ void UpdateVRAM(void)
 
     for (int i = 0; i < BALL_MAX; i++)
     {
-        VRAM[REMAINING_BALLS[i].y] |= (1 << REMAINING_BALLS[i].x);
+        if (TARGET_BALLS[i].x == -1 || TARGET_BALLS[i].y == -1)
+        {
+            continue;
+        }
+
+        VRAM[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
     }
 }
 
@@ -464,8 +469,8 @@ int main(void)
 
     for (int i = 0; i < BALL_MAX; i++)
     {
-        REMAINING_BALLS[i].x = i % MATRIX_LED_WIDTH;
-        REMAINING_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
+        TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
+        TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
     }
 
     UpdateVRAM();
