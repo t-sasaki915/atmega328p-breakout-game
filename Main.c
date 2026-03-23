@@ -374,20 +374,25 @@ void UpdateVRAM(void)
 // View timer
 ISR(TIMER1_COMPA_vect)
 {
+    if (VBLANK)
+    {
+        return;
+    }
+
     if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
     {
+        HIGH_PORT(MATRIX_LED_ROW_PINS[MATRIX_LED_Y_MAX]);
+
         CURRENT_VIEW_LINE = 0;
         VBLANK = 1;
 
         return;
     }
 
-    if (CURRENT_VIEW_LINE > 0)
+    if (CURRENT_VIEW_LINE != 0)
     {
         HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
     }
-
-    CURRENT_VIEW_LINE++;
 
     for (int i = 0; i < MATRIX_LED_WIDTH; i++)
     {
@@ -402,6 +407,8 @@ ISR(TIMER1_COMPA_vect)
     }
 
     LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
+
+    CURRENT_VIEW_LINE++;
 }
 
 // MOVE_LEFT_SW
@@ -490,6 +497,8 @@ int main(void)
         {
             MoveBall();
             UpdateVRAM();
+
+            VBLANK = 0;
         }
 
         _delay_ms(10);
