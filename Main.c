@@ -80,10 +80,10 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
     {&PORTD, &DDRD, PORTD0}  // ROW 1
 };
 
-static volatile Point MOVING_BALL_LOCATION = {0, 1};
-static volatile BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
+static Point MOVING_BALL_LOCATION = {0, 1};
+static BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
+static Point REMAINING_BALLS[BALL_MAX];
 static volatile uint8_t PADDLE_POSITION = 0;
-static volatile Point REMAINING_BALLS[BALL_MAX];
 static volatile uint8_t IS_GAMEOVER = 0;
 
 static volatile uint8_t VRAM[8];
