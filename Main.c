@@ -71,39 +71,74 @@ static volatile uint8_t CURRENT_VIEW_LINE = 0;
 void MoveBall(void)
 {
     uint8_t oldX = MOVING_BALL.x;
-    MOVING_BALL.x += MOVING_BALL.dx;
-    MOVING_BALL.y += MOVING_BALL.dy;
+    uint8_t oldY = MOVING_BALL.y;
+    int8_t newX = oldX + MOVING_BALL.dx;
+    int8_t newY = oldY + MOVING_BALL.dy;
+    int8_t newDX = MOVING_BALL.dx;
+    int8_t newDY = MOVING_BALL.dy;
+    uint8_t isChanged = 0;
 
-    if (MOVING_BALL.x <= 0)
-    {
-        MOVING_BALL.dx = 1;
-    }
-    else if (MOVING_BALL.x >= MATRIX_LED_X_MAX)
-    {
-        MOVING_BALL.dx = -1;
-    }
-
-    if (MOVING_BALL.y >= MATRIX_LED_Y_MAX)
-    {
-        MOVING_BALL.dy = -1;
-    }
-
-    if (MOVING_BALL.y <= 0)
+    if (newY == 0)
     {
         if (oldX == PADDLE_POSITION || oldX == PADDLE_POSITION + 1)
         {
-            MOVING_BALL.dy = 1;
+            newDY = 1;
+
+            isChanged = 1;
         }
-        else if (MOVING_BALL.x == PADDLE_POSITION || MOVING_BALL.x == PADDLE_POSITION + 1)
+        else if (newX == PADDLE_POSITION || newX == PADDLE_POSITION + 1)
         {
-            MOVING_BALL.dy = 1;
-            MOVING_BALL.dx *= -1;
+            newDY = 1;
+            newDX *= -1;
+
+            isChanged = 1;
         }
         else
         {
             IS_GAMEOVER = 1;
         }
     }
+
+    if (isChanged)
+    {
+        newX = oldX + newDX;
+        newY = oldY + newDY;
+
+        isChanged = 0;
+    }
+
+    if (newX < 0)
+    {
+        newDX = 1;
+
+        isChanged = 1;
+    }
+    else if (newX > MATRIX_LED_X_MAX)
+    {
+        newDX = -1;
+
+        isChanged = 1;
+    }
+
+    if (newY > MATRIX_LED_Y_MAX)
+    {
+        newDY = -1;
+
+        isChanged = 1;
+    }
+
+    if (isChanged)
+    {
+        newX = oldX + newDX;
+        newY = oldY + newDY;
+
+        isChanged = 0;
+    }
+
+    MOVING_BALL.x = newX;
+    MOVING_BALL.y = newY;
+    MOVING_BALL.dx = newDX;
+    MOVING_BALL.dy = newDY;
 }
 
 void UpdateVRAM(void)
@@ -164,7 +199,7 @@ ISR(TIMER1_COMPA_vect)
 
     HIGH_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE]);
 
-    if (CURRENT_VIEW_LINE >= MATRIX_LED_Y_MAX)
+    if (CURRENT_VIEW_LINE == MATRIX_LED_Y_MAX)
     {
         CURRENT_VIEW_LINE = 0;
     }
@@ -182,7 +217,7 @@ ISR(INT1_vect)
         return;
     }
 
-    if (PADDLE_POSITION <= 0)
+    if (PADDLE_POSITION == 0)
     {
         return;
     }
@@ -198,7 +233,7 @@ ISR(INT0_vect)
         return;
     }
 
-    if (PADDLE_POSITION >= MATRIX_LED_X_MAX - 1)
+    if (PADDLE_POSITION == MATRIX_LED_X_MAX - 1)
     {
         return;
     }
