@@ -108,7 +108,7 @@ void MoveBall(void)
 
 void UpdateVRAM(void)
 {
-    for (int i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < 8; i++)
     {
         VRAM_TEMP[i] = 0;
     }
@@ -117,7 +117,7 @@ void UpdateVRAM(void)
 
     VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
-    for (int i = 0; i < TARGET_BALL_MAX; i++)
+    for (uint8_t i = 0; i < TARGET_BALL_MAX; i++)
     {
         if (TARGET_BALLS[i].isActive)
         {
@@ -150,7 +150,7 @@ ISR(TIMER1_COMPA_vect)
         LOW_PORT(MATRIX_LED_ROW_PINS[CURRENT_VIEW_LINE - 1]);
     }
 
-    for (int i = 0; i < MATRIX_LED_WIDTH; i++)
+    for (uint8_t i = 0; i < MATRIX_LED_WIDTH; i++)
     {
         if (VRAM_DISPLAY[CURRENT_VIEW_LINE] & (1 << i))
         {
@@ -223,11 +223,11 @@ void InitTimer(void)
 
 int main(void)
 {
-    for (int i = 0; i < MATRIX_LED_WIDTH; i++)
+    for (uint8_t i = 0; i < MATRIX_LED_WIDTH; i++)
     {
         *MATRIX_LED_COL_PINS[i].ddr |= (1 << MATRIX_LED_COL_PINS[i].bit);
     }
-    for (int i = 0; i < MATRIX_LED_HEIGHT; i++)
+    for (uint8_t i = 0; i < MATRIX_LED_HEIGHT; i++)
     {
         *MATRIX_LED_ROW_PINS[i].ddr |= (1 << MATRIX_LED_ROW_PINS[i].bit);
     }
@@ -240,7 +240,7 @@ int main(void)
 
     sei();
 
-    for (int i = 0; i < TARGET_BALL_MAX; i++)
+    for (uint8_t i = 0; i < TARGET_BALL_MAX; i++)
     {
         TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
         TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
