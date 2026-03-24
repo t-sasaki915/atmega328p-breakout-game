@@ -14,12 +14,6 @@
 
 typedef struct
 {
-    int8_t x;
-    int8_t y;
-} Point;
-
-typedef struct
-{
     uint8_t x;
     uint8_t y;
     uint8_t isActive;
@@ -32,26 +26,6 @@ typedef struct
     int8_t dx;
     int8_t dy;
 } MovingBall;
-
-typedef enum
-{
-    TOWARDS_UPRIGHT,
-    TOWARDS_UPLEFT,
-    TOWARDS_DOWNRIGHT,
-    TOWARDS_DOWNLEFT
-} BallDirection;
-
-typedef enum
-{
-    DIRECTION_TOP,
-    DIRECTION_DOWN,
-    DIRECTION_LEFT,
-    DIRECTION_RIGHT,
-    DIRECTION_TOPRIGHT,
-    DIRECTION_TOPLEFT,
-    DIRECTION_DOWNRIGHT,
-    DIRECTION_DOWNLEFT
-} Direction;
 
 typedef struct
 {
@@ -84,8 +58,6 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
 
 static MovingBall MOVING_BALL = {0, 1, 1, 1};
 static TargetBall TARGET_BALLS[TARGET_BALL_MAX];
-static Point MOVING_BALL_LOCATION = {0, 1};
-static BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
@@ -95,257 +67,42 @@ static volatile uint8_t *VRAM_DISPLAY = VRAM_1;
 static volatile uint8_t *VRAM_TEMP = VRAM_2;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
 
-void BounceBallDirection(BallDirection *ballDirection, Direction obstacleDirection)
-{
-    switch (*ballDirection)
-    {
-        case TOWARDS_UPRIGHT: {
-            switch (obstacleDirection)
-            {
-                case DIRECTION_RIGHT: {
-                    *ballDirection = TOWARDS_UPLEFT;
-
-                    break;
-                }
-                case DIRECTION_TOP: {
-                    *ballDirection = TOWARDS_DOWNRIGHT;
-
-                    break;
-                }
-                case DIRECTION_TOPRIGHT: {
-                    *ballDirection = TOWARDS_DOWNLEFT;
-
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-            break;
-        }
-        case TOWARDS_UPLEFT: {
-            switch (obstacleDirection)
-            {
-                case DIRECTION_LEFT: {
-                    *ballDirection = TOWARDS_UPRIGHT;
-
-                    break;
-                }
-                case DIRECTION_TOP: {
-                    *ballDirection = TOWARDS_DOWNLEFT;
-
-                    break;
-                }
-                case DIRECTION_TOPLEFT: {
-                    *ballDirection = TOWARDS_DOWNRIGHT;
-
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-            break;
-        }
-        case TOWARDS_DOWNRIGHT: {
-            switch (obstacleDirection)
-            {
-                case DIRECTION_RIGHT: {
-                    *ballDirection = TOWARDS_DOWNLEFT;
-
-                    break;
-                }
-                case DIRECTION_DOWN: {
-                    *ballDirection = TOWARDS_UPRIGHT;
-
-                    break;
-                }
-                case DIRECTION_DOWNRIGHT: {
-                    *ballDirection = TOWARDS_UPLEFT;
-
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-            break;
-        }
-        case TOWARDS_DOWNLEFT: {
-            switch (obstacleDirection)
-            {
-                case DIRECTION_LEFT: {
-                    *ballDirection = TOWARDS_DOWNRIGHT;
-
-                    break;
-                }
-                case DIRECTION_DOWN: {
-                    *ballDirection = TOWARDS_UPLEFT;
-
-                    break;
-                }
-                case DIRECTION_DOWNLEFT: {
-                    *ballDirection = TOWARDS_UPRIGHT;
-
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-            break;
-        }
-    }
-}
-
-Point NextMovingBallPoint(BallDirection direction)
-{
-    Point newPoint;
-    newPoint.x = MOVING_BALL_LOCATION.x;
-    newPoint.y = MOVING_BALL_LOCATION.y;
-
-    switch (direction)
-    {
-        case TOWARDS_UPRIGHT: {
-            newPoint.x++;
-            newPoint.y++;
-
-            break;
-        }
-        case TOWARDS_UPLEFT: {
-            newPoint.x--;
-            newPoint.y++;
-
-            break;
-        }
-        case TOWARDS_DOWNRIGHT: {
-            newPoint.x++;
-            newPoint.y--;
-
-            break;
-        }
-        case TOWARDS_DOWNLEFT: {
-            newPoint.x--;
-            newPoint.y--;
-
-            break;
-        }
-    }
-
-    return newPoint;
-}
-
 void MoveBall(void)
 {
-    BallDirection newBallDirection = MOVING_BALL_DIRECTION;
-    Point currentPoint = MOVING_BALL_LOCATION;
-    Point newPoint = NextMovingBallPoint(newBallDirection);
+    uint8_t oldX = MOVING_BALL.x;
+    MOVING_BALL.x += MOVING_BALL.dx;
+    MOVING_BALL.y += MOVING_BALL.dy;
 
-    uint8_t isBounced = 0;
-
-    if (newPoint.y == 0)
+    if (MOVING_BALL.x <= 0)
     {
-        if (currentPoint.x == PADDLE_POSITION || currentPoint.x == PADDLE_POSITION + 1)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWN);
+        MOVING_BALL.dx = 1;
+    }
+    else if (MOVING_BALL.x >= MATRIX_LED_X_MAX)
+    {
+        MOVING_BALL.dx = -1;
+    }
 
-            isBounced = 1;
+    if (MOVING_BALL.y >= MATRIX_LED_Y_MAX)
+    {
+        MOVING_BALL.dy = -1;
+    }
+
+    if (MOVING_BALL.y <= 0)
+    {
+        if (oldX == PADDLE_POSITION || oldX == PADDLE_POSITION + 1)
+        {
+            MOVING_BALL.dy = 1;
         }
-        else if (newPoint.x == PADDLE_POSITION || newPoint.x == PADDLE_POSITION + 1)
+        else if (MOVING_BALL.x == PADDLE_POSITION || MOVING_BALL.x == PADDLE_POSITION + 1)
         {
-            if (newBallDirection == TOWARDS_DOWNLEFT)
-            {
-                BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
-
-                isBounced = 1;
-            }
-            else if (newBallDirection == TOWARDS_DOWNRIGHT)
-            {
-                BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
-
-                isBounced = 1;
-            }
+            MOVING_BALL.dy = 1;
+            MOVING_BALL.dx *= -1;
         }
         else
         {
             IS_GAMEOVER = 1;
         }
     }
-
-    if (isBounced != 0)
-    {
-        newPoint = NextMovingBallPoint(newBallDirection);
-    }
-
-    if (newPoint.y > MATRIX_LED_Y_MAX)
-    {
-        if (newPoint.x > MATRIX_LED_X_MAX)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_TOPRIGHT);
-
-            isBounced = 1;
-        }
-        else if (newPoint.x < 0)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_TOPLEFT);
-
-            isBounced = 1;
-        }
-        else
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_TOP);
-
-            isBounced = 1;
-        }
-    }
-    else if (newPoint.y < 0)
-    {
-        if (newPoint.x > MATRIX_LED_X_MAX)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWNRIGHT);
-
-            isBounced = 1;
-        }
-        else if (newPoint.x < 0)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWNLEFT);
-
-            isBounced = 1;
-        }
-        else
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_DOWN);
-
-            isBounced = 1;
-        }
-    }
-    else
-    {
-        if (newPoint.x > MATRIX_LED_X_MAX)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_RIGHT);
-
-            isBounced = 1;
-        }
-        else if (newPoint.x < 0)
-        {
-            BounceBallDirection(&newBallDirection, DIRECTION_LEFT);
-
-            isBounced = 1;
-        }
-    }
-
-    if (isBounced != 0)
-    {
-        newPoint = NextMovingBallPoint(newBallDirection);
-    }
-
-    MOVING_BALL_LOCATION = newPoint;
-    MOVING_BALL_DIRECTION = newBallDirection;
 }
 
 void UpdateVRAM(void)
@@ -481,7 +238,7 @@ int main(void)
     {
         TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
         TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
-        TARGET_BALLS[i].isActive = 1;
+        TARGET_BALLS[i].isActive = 0;
     }
 
     UpdateVRAM();
