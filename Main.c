@@ -2,7 +2,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define BALL_MAX 16
+#define TARGET_BALL_MAX 16
 
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
@@ -17,6 +17,21 @@ typedef struct
     int8_t x;
     int8_t y;
 } Point;
+
+typedef struct
+{
+    uint8_t x;
+    uint8_t y;
+    uint8_t isActive;
+} TargetBall;
+
+typedef struct
+{
+    uint8_t x;
+    uint8_t y;
+    int8_t dx;
+    int8_t dy;
+} MovingBall;
 
 typedef enum
 {
@@ -45,10 +60,6 @@ typedef struct
     uint8_t bit;
 } PortConfig;
 
-#define HIGH_PORT(portConf) *(portConf.port) |= (1 << (portConf.bit))
-
-#define LOW_PORT(portConf) *(portConf.port) &= ~(1 << (portConf.bit))
-
 static const PortConfig MATRIX_LED_COL_PINS[] = {
     {&PORTB, &DDRB, PORTB6}, // COL 1
     {&PORTD, &DDRD, PORTD6}, // COL 2
@@ -71,9 +82,10 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
     {&PORTD, &DDRD, PORTD0}  // ROW 1
 };
 
+static MovingBall MOVING_BALL = {0, 1, 1, 1};
+static TargetBall TARGET_BALLS[TARGET_BALL_MAX];
 static Point MOVING_BALL_LOCATION = {0, 1};
 static BallDirection MOVING_BALL_DIRECTION = TOWARDS_UPRIGHT;
-static Point TARGET_BALLS[BALL_MAX];
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
@@ -343,24 +355,25 @@ void UpdateVRAM(void)
         VRAM_TEMP[i] = 0;
     }
 
-    VRAM_TEMP[MOVING_BALL_LOCATION.y] |= (1 << MOVING_BALL_LOCATION.x);
+    VRAM_TEMP[MOVING_BALL.y] |= (1 << MOVING_BALL.x);
 
     VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
-    for (int i = 0; i < BALL_MAX; i++)
+    for (int i = 0; i < TARGET_BALL_MAX; i++)
     {
-        if (TARGET_BALLS[i].x == -1 || TARGET_BALLS[i].y == -1)
+        if (TARGET_BALLS[i].isActive)
         {
-            continue;
+            VRAM_TEMP[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
         }
-
-        VRAM_TEMP[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
     }
 
     volatile uint8_t *temp = VRAM_DISPLAY;
     VRAM_DISPLAY = VRAM_TEMP;
     VRAM_TEMP = temp;
 }
+
+#define HIGH_PORT(portConf) *(portConf.port) |= (1 << (portConf.bit))
+#define LOW_PORT(portConf) *(portConf.port) &= ~(1 << (portConf.bit))
 
 // View timer
 ISR(TIMER1_COMPA_vect)
@@ -464,10 +477,11 @@ int main(void)
 
     sei();
 
-    for (int i = 0; i < BALL_MAX; i++)
+    for (int i = 0; i < TARGET_BALL_MAX; i++)
     {
         TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
         TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
+        TARGET_BALLS[i].isActive = 1;
     }
 
     UpdateVRAM();
