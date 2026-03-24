@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <util/atomic.h>
 #include <util/delay.h>
 
 #define TARGET_BALL_MAX 16
@@ -61,10 +62,10 @@ static TargetBall TARGET_BALLS[TARGET_BALL_MAX];
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
-static volatile uint8_t VRAM_1[8];
-static volatile uint8_t VRAM_2[8];
-static volatile uint8_t *VRAM_DISPLAY = VRAM_1;
-static volatile uint8_t *VRAM_TEMP = VRAM_2;
+static uint8_t VRAM_1[8];
+static uint8_t VRAM_2[8];
+static uint8_t *VRAM_TEMP = VRAM_1;
+static volatile uint8_t *VRAM_DISPLAY = VRAM_2;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
 
 void MoveBall(void)
@@ -124,9 +125,14 @@ void UpdateVRAM(void)
         }
     }
 
-    volatile uint8_t *temp = VRAM_DISPLAY;
-    VRAM_DISPLAY = VRAM_TEMP;
-    VRAM_TEMP = temp;
+    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    {
+        (void)sreg_save;
+
+        uint8_t *vramDisplayAddress = (uint8_t *)VRAM_DISPLAY;
+        VRAM_DISPLAY = VRAM_TEMP;
+        VRAM_TEMP = vramDisplayAddress;
+    }
 }
 
 #define HIGH_PORT(portConf) *(portConf.port) |= (1 << (portConf.bit))
