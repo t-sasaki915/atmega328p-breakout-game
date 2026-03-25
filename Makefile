@@ -18,7 +18,7 @@ $(TARGET).elf: $(TARGET).S
 	$(CC) $(CFLAGS) -o $(TARGET).elf -nostartfiles $(TARGET).S
 
 $(TARGET).hex: $(TARGET).elf
-	$(OBJCOPY) -O ihex -R .eeprom $(TARGET).elf $(TARGET).hex
+	$(OBJCOPY) -O ihex -R .eeprom -O ihex -j .text -j .data $(TARGET).elf $(TARGET).hex
 
 flash: $(TARGET).hex
 	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U flash:w:$(TARGET).hex:i

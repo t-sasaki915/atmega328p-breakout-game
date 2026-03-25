@@ -55,7 +55,7 @@
         BREQ SET_MATRIX_LED_ROW_PINS_MODE        ; If loop count (R16) is zero, jump to SET_MATRIX_LED_ROW_PINS_MODE.
                                                  ; If not, continue.
         
-        RJMP SET_MATRIX_LED_COL_PINS_MODE_LOOP  ; Back to SET_MATRIX_LED_COL_PINS_MODE_LOOP.
+        RJMP SET_MATRIX_LED_COL_PINS_MODE_LOOP   ; Back to SET_MATRIX_LED_COL_PINS_MODE_LOOP.
     
     SET_MATRIX_LED_ROW_PINS_MODE:
         LDI  R16, MATRIX_LED_HEIGHT              ; Load MATRIX_LED_HEIGHT to R16; will be used as loop count.
@@ -87,13 +87,43 @@
         ADIW R30, 5                              ; Set Z register to next PORT_CONF_ENTRY.
 
         DEC  R16                                 ; Decrease loop count (R16).
-        BREQ INITIALISE_CONTINUE                 ; If loop count (R16) is zero, jump to INITIALISE_CONTINUE.
+        BREQ MAIN_LOOP                           ; If loop count (R16) is zero, jump to MAIN_LOOP.
                                                  ; If not, continue.
         
-        RJMP SET_MATRIX_LED_ROW_PINS_MODE_LOOP  ; Back to SET_MATRIX_LED_ROW_PINS_MODE_LOOP.
+        RJMP SET_MATRIX_LED_ROW_PINS_MODE_LOOP   ; Back to SET_MATRIX_LED_ROW_PINS_MODE_LOOP.
     
-    INITIALISE_CONTINUE:
-        NOP                                      ; TODO
+    MAIN_LOOP:                                   ; TEST
+        LDI  R30, lo8(MATRIX_LED_COL_PINS)       
+        LDI  R31, hi8(MATRIX_LED_COL_PINS)
+        LDD  R16, Z+4
+
+        LDI  R18, 1
+
+    TEMP_SHIFT_LOOP_1:
+        LSL  R18
+        DEC  R16
+        BRNE TEMP_SHIFT_LOOP_1
+
+        LD   R20, Z
+        OR   R20, R18
+        ST   Z, R20
+
+        LDI  R30, lo8(MATRIX_LED_ROW_PINS)
+        LDI  R31, hi8(MATRIX_LED_ROW_PINS)
+        LDD  R16, Z+4
+
+        LDI  R18, 1
+    
+    TEMP_SHIFT_LOOP_2:
+        LSL  R18
+        DEC  R16
+        BRNE TEMP_SHIFT_LOOP_2
+
+        LD   R20, Z
+        OR   R20, R18
+        ST   Z, R20
+
+        RJMP MAIN_LOOP
 
 .section .rodata
     .TYPE MATRIX_LED_ROW_PINS, @object
