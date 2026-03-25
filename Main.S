@@ -1,15 +1,17 @@
- #include <avr/io.h>
+#include <avr/io.h>
 
- #define PORT_CONF_ENTRY(port, ddr, bit) \
-    .word _SFR_MEM_ADDR(port);           \
-    .word _SFR_MEM_ADDR(ddr);            \
-    .byte bit
+.macro PORT_CONF_ENTRY port, ddr, bit
+    .word _SFR_MEM_ADDR(\port)
+    .word _SFR_MEM_ADDR(\ddr)
+    .byte \bit
+.endm
 
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
 
-.section .vectors
-    RJMP MAIN
+.section .vectors, "ax", @progbits
+.org 0x0000
+    rjmp MAIN
 
 .section .text
     .TYPE MAIN, @function
@@ -125,27 +127,26 @@
 
         RJMP MAIN_LOOP
 
-.section .rodata
     .TYPE MATRIX_LED_ROW_PINS, @object
     .SIZE MATRIX_LED_ROW_PINS, 40
     MATRIX_LED_ROW_PINS:
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB3)     ; ROW 8
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB4)     ; ROW 7
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB2)     ; ROW 6
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB5)     ; ROW 5
-        PORT_CONF_ENTRY(PORTC, DDRC, PORTC4)     ; ROW 4
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB1)     ; ROW 3
-        PORT_CONF_ENTRY(PORTC, DDRC, PORTC5)     ; ROW 2
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD0)     ; ROW 1
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB3      ; ROW 8
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB4      ; ROW 7
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB2      ; ROW 6
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB5      ; ROW 5
+        PORT_CONF_ENTRY PORTC, DDRC, PORTC4      ; ROW 4
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB1      ; ROW 3
+        PORT_CONF_ENTRY PORTC, DDRC, PORTC5      ; ROW 2
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD0      ; ROW 1
 
     .TYPE MATRIX_LED_COL_PINS, @object
     .SIZE MATRIX_LED_COL_PINS, 40
     MATRIX_LED_COL_PINS:
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB6)     ; COL 1
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD6)     ; COL 2
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD7)     ; COL 3
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD1)     ; COL 4
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB0)     ; COL 5
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD4)     ; COL 6
-        PORT_CONF_ENTRY(PORTB, DDRB, PORTB7)     ; COL 7
-        PORT_CONF_ENTRY(PORTD, DDRD, PORTD5)     ; COL 8
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB6      ; COL 1
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD6      ; COL 2
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD7      ; COL 3
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD1      ; COL 4
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB0      ; COL 5
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD4      ; COL 6
+        PORT_CONF_ENTRY PORTB, DDRB, PORTB7      ; COL 7
+        PORT_CONF_ENTRY PORTD, DDRD, PORTD5      ; COL 8
