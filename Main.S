@@ -14,22 +14,21 @@
 .section .text
     .TYPE MAIN, @function
     MAIN:                                        ; Function 'MAIN':
-        LDI  R16, lo8(RAMEND)                    ; Initialise stack pointers.
+    INITIALISE_STACK_POINTERS:
+        LDI  R16, lo8(RAMEND)                   
         OUT  _SFR_IO_ADDR(SPL), R16
         LDI  R16, hi8(RAMEND)
         OUT  _SFR_IO_ADDR(SPH), R16
-
-                                                 ; Set MATRIX_LED_COL_PINS to output mode.
-
+    
         LDI  R20, 1                              ; Load '1' to R20; will be used to shift bits.
 
+    SET_MATRIX_LED_COL_PINS_MODE:
         LDI  R16, MATRIX_LED_WIDTH               ; Load MATRIX_LED_WIDTH to R16; will be used as loop count.
-        LDI  R17, MATRIX_LED_HEIGHT              ; Load MATRIX_LED_HEIGHT to R17; will be used as loop count.
 
         LDI  R30, lo8(MATRIX_LED_COL_PINS)       ; Load the first address of MATRIX_LED_COL_PINS to Z register.
         LDI  R31, hi8(MATRIX_LED_COL_PINS)       
 
-    INIT_LED_DDR_LOOP:
+    SET_MATRIX_LED_COL_PINS_MODE_LOOP:
         LDD  R26, Z+2                            ; Store ddr to X register.
         LDD  R27, Z+3
         LD   R24, X                              ; Peek X register and store the ddr value to R24.
@@ -38,15 +37,50 @@
         MOV  R22, R20                            ; Copy '1' (R20) to R22.
 
         TST  R18                                 ; Is bit offset (R18) zero?
-        BREQ INIT_LED_DDR_APPLY_MASK             ; If so, jump to INIT_LED_DDR_APPLY_MASK directly.
-                                                 ; If not, continue to INIT_LED_DDR_SHIFT_LOOP.
+        BREQ SET_COL_PIN_MODE_APPLY_MASK         ; If so, jump to SET_COL_PIN_MODE_APPLY_MASK directly.
+                                                 ; If not, continue to SET_COL_PIN_MODE_SHIFT_LOOP.
     
-    INIT_LED_DDR_SHIFT_LOOP:
+    SET_COL_PIN_MODE_SHIFT_LOOP:
         LSL  R22                                 ; Shift one bit to the left.
         DEC  R18                                 ; Decrease bit offset (R18).
-        BRNE INIT_LED_DDR_SHIFT_LOOP             ; Repeat INIT_LED_DDR_SHIFT_LOOP until R18 = 0.
+        BRNE SET_COL_PIN_MODE_SHIFT_LOOP         ; Repeat SET_COL_PIN_MODE_SHIFT_LOOP until R18 = 0.
 
-    INIT_LED_DDR_APPLY_MASK:
+    SET_COL_PIN_MODE_APPLY_MASK:
+        OR   R24, R22                            ; DDR (R24) | 1 (R22).
+        ST   X, R24                              ; Put altered DDR value (R24) back to X register.
+
+        ADIW R30, 5                              ; Set Z register to next PORT_CONF_ENTRY.
+
+        DEC  R16                                 ; Decrease loop count (R16).
+        BREQ SET_MATRIX_LED_ROW_PINS_MODE        ; If loop count (R16) is zero, jump to SET_MATRIX_LED_ROW_PINS_MODE.
+                                                 ; If not, continue.
+        
+        RJMP SET_MATRIX_LED_COL_PINS_MODE_LOOP  ; Back to SET_MATRIX_LED_COL_PINS_MODE_LOOP.
+    
+    SET_MATRIX_LED_ROW_PINS_MODE:
+        LDI  R16, MATRIX_LED_HEIGHT              ; Load MATRIX_LED_HEIGHT to R16; will be used as loop count.
+        
+        LDI  R30, lo8(MATRIX_LED_ROW_PINS)       ; Load the first address of MATRIX_LED_ROW_PINS to Z register.
+        LDI  R31, hi8(MATRIX_LED_ROW_PINS)
+
+    SET_MATRIX_LED_ROW_PINS_MODE_LOOP:
+        LDD  R26, Z+2                            ; Store ddr to X register.
+        LDD  R27, Z+3
+        LD   R24, X                              ; Peek X register and store the ddr value to R24.
+        LDD  R18, Z+4                            ; Store bit offset to R18.
+
+        MOV  R22, R20                            ; Copy '1' (R20) to R22.
+
+        TST  R18                                 ; Is bit offset (R18) zero?
+        BREQ SET_ROW_PIN_MODE_APPLY_MASK         ; If so, jump to SET_ROW_PIN_MODE_APPLY_MASK directly.
+                                                 ; If not, continue to SET_ROW_PIN_MODE_SHIFT_LOOP.
+
+    SET_ROW_PIN_MODE_SHIFT_LOOP:
+        LSL  R22                                 ; Shift one bit to the left.
+        DEC  R18                                 ; Decrease bit offset (R18).
+        BRNE SET_ROW_PIN_MODE_SHIFT_LOOP         ; Repeat SET_ROW_PIN_MODE_SHIFT_LOOP until R18 = 0.
+
+    SET_ROW_PIN_MODE_APPLY_MASK:
         OR   R24, R22                            ; DDR (R24) | 1 (R22).
         ST   X, R24                              ; Put altered DDR value (R24) back to X register.
 
@@ -56,7 +90,7 @@
         BREQ INITIALISE_CONTINUE                 ; If loop count (R16) is zero, jump to INITIALISE_CONTINUE.
                                                  ; If not, continue.
         
-        RJMP  INIT_LED_DDR_LOOP                  ; Back to INIT_LED_DDR_LOOP.
+        RJMP SET_MATRIX_LED_ROW_PINS_MODE_LOOP  ; Back to SET_MATRIX_LED_ROW_PINS_MODE_LOOP.
     
     INITIALISE_CONTINUE:
         NOP                                      ; TODO
