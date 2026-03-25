@@ -279,7 +279,7 @@ int main(void)
     {
         TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
         TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
-        TARGET_BALLS[i].isActive = 0;
+        TARGET_BALLS[i].isActive = 1;
     }
 
     UpdateVRAM();
