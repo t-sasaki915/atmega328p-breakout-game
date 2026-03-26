@@ -12,13 +12,13 @@ AVRDUDE = avrdude
 
 CFLAGS = -Wall -Wextra -Wpedantic -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 
-all: $(TARGET).hex $(TARGET).S
+all: $(TARGET).hex $(TARGET).c
 
-$(TARGET).elf: $(TARGET).S
-	$(CC) $(CFLAGS) -o $(TARGET).elf -nostartfiles $(TARGET).S
+$(TARGET).elf: $(TARGET).c
+	$(CC) $(CFLAGS) -o $(TARGET).elf $(TARGET).c
 
 $(TARGET).hex: $(TARGET).elf
-	$(OBJCOPY) -O ihex -R .eeprom $(TARGET).elf $(TARGET).hex
+	$(OBJCOPY) -O ihex $(TARGET).elf $(TARGET).hex
 
 flash: $(TARGET).hex
 	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U flash:w:$(TARGET).hex:i
