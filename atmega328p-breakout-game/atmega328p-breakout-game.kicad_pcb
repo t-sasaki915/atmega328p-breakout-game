@@ -3321,7 +3321,7 @@
 		(property "Reference" "C3"
 			(at 0 1.64 90)
 			(layer "F.SilkS")
-			(uuid "d0db02aa-f810-49ac-befe-ee0bcce2c836")
+			(uuid "255fc23b-47bb-4f95-bafd-951109acd5ac")
 			(effects
 				(font
 					(size 1 1)
@@ -3329,10 +3329,10 @@
 				)
 			)
 		)
-		(property "Value" "0.1μF"
+		(property "Value" "1μF"
 			(at 0 1.68 90)
 			(layer "F.Fab")
-			(uuid "5c14e275-f560-4f6b-bd69-97d56e5edfb1")
+			(uuid "462cf15e-f485-408c-bb7a-64c17009b7e4")
 			(effects
 				(font
 					(size 1 1)
@@ -3344,7 +3344,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "3f7bd257-6e8d-411e-93d9-7092a165cab0")
+			(uuid "e01c0cc8-1efc-4fa4-b604-5299f75d423f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3356,7 +3356,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "784a8711-d33c-4eb3-b0ee-e2e893c36072")
+			(uuid "a9022d03-50de-4e98-ab52-bd45cd5869bf")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3470,7 +3470,7 @@
 				)
 			)
 		)
-		(property "Value" "0.1μF"
+		(property "Value" "1μF"
 			(at 0 1.68 90)
 			(layer "F.Fab")
 			(uuid "19f82e64-65a3-48b9-82ec-ed271dbb83f4")
@@ -3611,7 +3611,7 @@
 				)
 			)
 		)
-		(property "Value" "1kΩ"
+		(property "Value" "10kΩ"
 			(at 0 1.65 90)
 			(layer "F.Fab")
 			(uuid "f7128f57-d155-438a-961e-0ade4130db69")
@@ -4611,7 +4611,7 @@
 				)
 			)
 		)
-		(property "Value" "1kΩ"
+		(property "Value" "10kΩ"
 			(at 0 1.65 90)
 			(layer "F.Fab")
 			(uuid "33802f24-83dc-4e7e-9bee-afb641c1edc8")
@@ -9299,8 +9299,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "1kΩ"
-		(at 155.54 111.6 90)
+	(gr_text "10kΩ"
+		(at 155.55 112.08 90)
 		(layer "F.SilkS")
 		(uuid "2df470bb-f242-4a72-9988-27aea5245876")
 		(effects
@@ -9311,8 +9311,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "0.1μF"
-		(at 134.51 112.42 90)
+	(gr_text "1μF"
+		(at 134.56 111.59 90)
 		(layer "F.SilkS")
 		(uuid "2f080722-f3ee-4acf-846b-37d9ed71f976")
 		(effects
@@ -9443,8 +9443,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "1kΩ"
-		(at 129.51 111.6 90)
+	(gr_text "10kΩ"
+		(at 129.5 112.07 90)
 		(layer "F.SilkS")
 		(uuid "ea2f3aae-3544-40ba-bad1-3431b5475787")
 		(effects
@@ -9455,8 +9455,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "0.1μF"
-		(at 160.56 112.42 90)
+	(gr_text "1μF"
+		(at 160.59 111.8 90)
 		(layer "F.SilkS")
 		(uuid "f358ac4b-b23a-4762-b979-80e3681f2b3d")
 		(effects
