@@ -3,7 +3,7 @@
 #include <util/atomic.h>
 #include <util/delay.h>
 
-#define TARGET_BALL_MAX 16
+#define TARGET_BALL_ROWS 2
 
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
@@ -58,7 +58,7 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
 };
 
 static MovingBall MOVING_BALL = {0, 1, 1, 1};
-static TargetBall TARGET_BALLS[TARGET_BALL_MAX];
+static uint8_t TARGET_BALLS[TARGET_BALL_ROWS] = {0b11111111, 0b11111111};
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
@@ -135,6 +135,26 @@ void MoveBall(void)
         isChanged = 0;
     }
 
+    if (newY >= MATRIX_LED_WIDTH - TARGET_BALL_ROWS)
+    {
+        if (TARGET_BALLS[MATRIX_LED_Y_MAX - newY] & (1 << newX))
+        {
+            TARGET_BALLS[MATRIX_LED_Y_MAX - newY] &= ~(1 << newX);
+
+            newDY *= -1;
+
+            isChanged = 1;
+        }
+    }
+
+    if (isChanged)
+    {
+        newX = oldX + newDX;
+        newY = oldY + newDY;
+
+        isChanged = 0;
+    }
+
     MOVING_BALL.x = newX;
     MOVING_BALL.y = newY;
     MOVING_BALL.dx = newDX;
@@ -152,12 +172,9 @@ void UpdateVRAM(void)
 
     VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
-    for (uint8_t i = 0; i < TARGET_BALL_MAX; i++)
+    for (uint8_t i = 0; i < TARGET_BALL_ROWS; i++)
     {
-        if (TARGET_BALLS[i].isActive)
-        {
-            VRAM_TEMP[TARGET_BALLS[i].y] |= (1 << TARGET_BALLS[i].x);
-        }
+        VRAM_TEMP[MATRIX_LED_Y_MAX - i] = TARGET_BALLS[i];
     }
 
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
@@ -274,13 +291,6 @@ int main(void)
     InitTimer();
 
     sei();
-
-    for (uint8_t i = 0; i < TARGET_BALL_MAX; i++)
-    {
-        TARGET_BALLS[i].x = i % MATRIX_LED_WIDTH;
-        TARGET_BALLS[i].y = MATRIX_LED_Y_MAX - ((int8_t)i / MATRIX_LED_WIDTH);
-        TARGET_BALLS[i].isActive = 1;
-    }
 
     UpdateVRAM();
 
