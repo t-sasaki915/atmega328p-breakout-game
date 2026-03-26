@@ -17,13 +17,6 @@ typedef struct
 {
     uint8_t x;
     uint8_t y;
-    uint8_t isActive;
-} TargetBall;
-
-typedef struct
-{
-    uint8_t x;
-    uint8_t y;
     int8_t dx;
     int8_t dy;
 } MovingBall;
@@ -153,6 +146,19 @@ void MoveBall(void)
         newY = oldY + newDY;
 
         isChanged = 0;
+
+        uint8_t isClear = 1;
+        for (uint8_t i = 0; i < TARGET_BALL_ROWS; i++)
+        {
+            if (TARGET_BALLS[i] != 0)
+            {
+                isClear = 0;
+
+                break;
+            }
+        }
+
+        IS_GAMEOVER = isClear;
     }
 
     MOVING_BALL.x = newX;
