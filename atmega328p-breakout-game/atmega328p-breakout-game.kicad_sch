@@ -7434,7 +7434,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Transistor_BJT:DTC114E"
+		(symbol "Transistor_BJT:DTC113Z"
 			(pin_names
 				(offset 0)
 				(hide yes)
@@ -7451,7 +7451,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "DTC114E"
+			(property "Value" "DTC113Z"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -7480,7 +7480,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
+			(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
 				(at 0 0 0)
 				(effects
 					(font
@@ -7507,8 +7507,8 @@
 					(hide yes)
 				)
 			)
-			(symbol "DTC114E_0_0"
-				(text "10k"
+			(symbol "DTC113Z_0_0"
+				(text "1k"
 					(at -3.302 0.889 0)
 					(effects
 						(font
@@ -7525,7 +7525,7 @@
 					)
 				)
 			)
-			(symbol "DTC114E_0_1"
+			(symbol "DTC113Z_0_1"
 				(polyline
 					(pts
 						(xy -3.429 0) (xy -3.81 0)
@@ -7695,7 +7695,7 @@
 					)
 				)
 			)
-			(symbol "DTC114E_1_1"
+			(symbol "DTC113Z_1_1"
 				(pin input line
 					(at -6.35 0 0)
 					(length 2.54)
@@ -9774,81 +9774,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 137.16 151.13 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1e7d3afb-20d1-4114-9fc8-60a36c6c4c06")
-		(property "Reference" "Q4"
-			(at 142.24 149.8599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DTC114E"
-			(at 142.24 152.3999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 137.16 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 137.16 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "fe58188d-ff59-478d-944c-c42c7f088423")
-		)
-		(pin "3"
-			(uuid "f09fcfa6-99cb-41e9-b73a-3a47dc02b920")
-		)
-		(pin "1"
-			(uuid "64899a93-291f-46e7-b9bc-e728a58e2bdc")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 226.06 128.27 270)
 		(unit 1)
@@ -9910,6 +9835,81 @@
 			(project "atmega328p-breakout-game"
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 137.16 168.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "251782c8-313c-4d63-af9b-a23de75f77a1")
+		(property "Reference" "Q5"
+			(at 142.24 167.6399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DTC113Z"
+			(at 142.24 170.1799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 137.16 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "732a40d5-48d0-4af6-87c9-a0f936a9f572")
+		)
+		(pin "3"
+			(uuid "ddfb184a-e662-41e1-aa6b-ef2d14e35080")
+		)
+		(pin "2"
+			(uuid "17573af4-3ba9-4987-ba83-0518fa0da4ff")
+		)
+		(instances
+			(project "atmega328p-breakout-game"
+				(path "/c006220f-50e8-436e-9254-0df721c83572"
+					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -10046,6 +10046,81 @@
 			(project ""
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 137.16 125.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3392ac3c-b418-42f8-8eaf-c91e9016bdc5")
+		(property "Reference" "Q3"
+			(at 142.24 124.4599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DTC113Z"
+			(at 142.24 126.9999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 137.16 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f97126b2-c068-4e74-92aa-c94b95d34108")
+		)
+		(pin "3"
+			(uuid "bef820ca-3374-449f-ae92-96fecd3fe1fe")
+		)
+		(pin "2"
+			(uuid "9fcde387-87aa-4e95-9051-1096e6b90a54")
+		)
+		(instances
+			(project "atmega328p-breakout-game"
+				(path "/c006220f-50e8-436e-9254-0df721c83572"
+					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -10737,81 +10812,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 137.16 125.73 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "47be9854-67f4-48ec-a122-4de02124f87d")
-		(property "Reference" "Q3"
-			(at 142.24 124.4599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DTC114E"
-			(at 142.24 126.9999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 137.16 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 137.16 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5a9e38b5-bf78-4235-82be-6a2480946a49")
-		)
-		(pin "3"
-			(uuid "3f4eef65-7dac-4db6-8621-e405a2a4ab54")
-		)
-		(pin "1"
-			(uuid "2ec88e95-d729-46a0-974e-5a680b93e509")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 226.06 69.85 270)
 		(unit 1)
@@ -10945,6 +10945,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 137.16 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "58286331-daac-4d36-8059-94b3589a5476")
+		(property "Reference" "Q2"
+			(at 142.24 91.4399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DTC113Z"
+			(at 142.24 93.9799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 137.16 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0b069b04-905e-4e3a-b136-da51bef636c6")
+		)
+		(pin "3"
+			(uuid "6ff45868-8018-4fb3-9f66-e4381d39b2f0")
+		)
+		(pin "2"
+			(uuid "8b35adfe-47c1-4ed8-8c22-23fda5d1fda6")
+		)
+		(instances
+			(project "atmega328p-breakout-game"
+				(path "/c006220f-50e8-436e-9254-0df721c83572"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 62.23 52.07 270)
 		(unit 1)
@@ -11007,6 +11082,81 @@
 			(project ""
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 137.16 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5cddd569-c7a2-433e-93aa-f44fcc8c721a")
+		(property "Reference" "Q4"
+			(at 142.24 149.8599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DTC113Z"
+			(at 142.24 152.3999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 137.16 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 137.16 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4a539718-7fc6-47de-bd03-19c084302854")
+		)
+		(pin "3"
+			(uuid "be3ba340-0cd5-4d53-9982-f27caab7a15e")
+		)
+		(pin "2"
+			(uuid "d437b26f-3327-474d-8d53-a2cc037b7061")
+		)
+		(instances
+			(project "atmega328p-breakout-game"
+				(path "/c006220f-50e8-436e-9254-0df721c83572"
+					(reference "Q4")
 					(unit 1)
 				)
 			)
@@ -11278,17 +11428,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 227.33 111.76 0)
-		(mirror y)
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 137.16 74.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6e0c444a-527d-4e6b-982f-560bc1f14d29")
-		(property "Reference" "Q7"
-			(at 235.966 115.062 0)
+		(fields_autoplaced yes)
+		(uuid "6d6e8256-f8c0-40ee-81d4-a93e9483ece1")
+		(property "Reference" "Q1"
+			(at 142.24 73.6599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11296,8 +11446,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "DTC114E"
-			(at 235.966 117.602 0)
+		(property "Value" "DTC113Z"
+			(at 142.24 76.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11306,7 +11456,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 227.33 111.76 0)
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11316,7 +11466,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 111.76 0)
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11325,8 +11475,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 227.33 111.76 0)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 137.16 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11334,19 +11484,19 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "41fff2f7-bf7a-4ee9-a600-956223c55ab7")
+		(pin "1"
+			(uuid "35f57ad6-f99e-42e3-85c3-5dad4604eeb7")
 		)
 		(pin "3"
-			(uuid "f577ba3c-8f5d-4639-a213-f65b036b1369")
+			(uuid "3ac1ac8f-5144-46b1-a3e4-b1aa7c71d897")
 		)
-		(pin "1"
-			(uuid "69c1fa78-e7bb-47c3-ba76-63e6e92bdc32")
+		(pin "2"
+			(uuid "d220ba45-5cb7-40c9-97e8-3121b95bcd97")
 		)
 		(instances
-			(project "atmega328p-breakout-game"
+			(project ""
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q7")
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -11797,7 +11947,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
+		(lib_id "Transistor_BJT:DTC113Z")
 		(at 227.33 143.51 0)
 		(mirror y)
 		(unit 1)
@@ -11805,9 +11955,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7df4466f-5f8e-4cad-8836-70dbb83faabc")
+		(uuid "86826b1e-5ba9-4de2-9568-b2dfa261a95e")
 		(property "Reference" "Q8"
-			(at 235.966 147.574 0)
+			(at 222.25 144.7801 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11815,8 +11965,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "DTC114E"
-			(at 235.966 150.114 0)
+		(property "Value" "DTC113Z"
+			(at 222.25 142.2401 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11844,7 +11994,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
 			(at 227.33 143.51 0)
 			(effects
 				(font
@@ -11853,14 +12003,14 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "6ef705be-5abb-43b0-8944-bb2700e33cf9")
+		(pin "1"
+			(uuid "c45c8f36-f228-4e09-a917-d4756bbd38eb")
 		)
 		(pin "3"
-			(uuid "39831d4b-e88e-4de4-b3b1-e1a672a5a71a")
+			(uuid "005d724b-52a9-4820-b25f-99c388ec14b3")
 		)
-		(pin "1"
-			(uuid "fa73deed-cd57-494e-8d40-6f321560e9cf")
+		(pin "2"
+			(uuid "f1d7ed3b-8021-4dd2-a5bd-1f3672978fae")
 		)
 		(instances
 			(project "atmega328p-breakout-game"
@@ -12210,156 +12360,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 137.16 74.93 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aa8bb3fd-51cd-47c1-8b39-9540366b8d7d")
-		(property "Reference" "Q1"
-			(at 142.24 73.6599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DTC114E"
-			(at 142.24 76.1999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 137.16 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 137.16 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8cfa5f7f-7170-4ffc-b7cb-07cf3ed6f4ce")
-		)
-		(pin "3"
-			(uuid "4a46c7e5-f7e7-493c-bd8e-991a7f173a7d")
-		)
-		(pin "1"
-			(uuid "ea1b839c-331a-418e-93a9-5ab39a9dcf81")
-		)
-		(instances
-			(project ""
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 137.16 92.71 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aee9f3b3-cabd-43a4-97c2-34c13ff0f120")
-		(property "Reference" "Q2"
-			(at 142.24 91.4399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DTC114E"
-			(at 142.24 93.9799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 137.16 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 137.16 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "cdcb468a-611e-4129-b58c-9cc5e59b8ab6")
-		)
-		(pin "3"
-			(uuid "f263dcfe-59a6-48ed-ac6a-2839f7b2ab35")
-		)
-		(pin "1"
-			(uuid "759a97b4-f4df-49a2-99f3-5695bcb5f849")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 139.7 130.81 0)
 		(unit 1)
@@ -12693,17 +12693,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 227.33 86.36 0)
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 227.33 111.76 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c7a67332-f498-41c4-b68b-e27925b71093")
-		(property "Reference" "Q6"
-			(at 236.474 90.17 0)
+		(uuid "cdfd02a4-e1c9-4f76-8c60-6b25045420b7")
+		(property "Reference" "Q7"
+			(at 222.25 113.0301 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12711,8 +12711,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "DTC114E"
-			(at 236.474 92.71 0)
+		(property "Value" "DTC113Z"
+			(at 222.25 110.4901 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12721,7 +12721,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 227.33 86.36 0)
+			(at 227.33 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12731,7 +12731,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 86.36 0)
+			(at 227.33 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12740,8 +12740,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 227.33 86.36 0)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 227.33 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12749,19 +12749,19 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "4f3fbad7-55f7-4d3b-b3ba-7242b45252e6")
+		(pin "1"
+			(uuid "9c0fc565-34ee-4bf3-882c-7be4f997eaca")
 		)
 		(pin "3"
-			(uuid "86084480-41a4-4002-9193-1b9d18de4415")
+			(uuid "55576bb9-85b5-45ec-8fec-beb37cce5a4e")
 		)
-		(pin "1"
-			(uuid "c939914d-6f5b-47d3-9c4e-8660a9bd5924")
+		(pin "2"
+			(uuid "317baef5-aeb6-49a4-9ebc-037adea04849")
 		)
 		(instances
 			(project "atmega328p-breakout-game"
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q6")
+					(reference "Q7")
 					(unit 1)
 				)
 			)
@@ -13048,81 +13048,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_BJT:DTC114E")
-		(at 137.16 168.91 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e8bdd6ca-fd08-4922-bf70-4eff580a007f")
-		(property "Reference" "Q5"
-			(at 142.24 167.6399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DTC114E"
-			(at 142.24 170.1799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 137.16 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Digital NPN Transistor, 10k/10k, SOT-23"
-			(at 137.16 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "31539783-58bf-4b35-9768-abc6ba9d7d9d")
-		)
-		(pin "3"
-			(uuid "ea893a52-ffd2-42b5-a2a2-b2111288d4de")
-		)
-		(pin "1"
-			(uuid "16ccc7ad-f1ef-4c94-9cab-3ee9a8bf8d85")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "Q5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VCC")
 		(at 240.03 45.72 0)
 		(unit 1)
@@ -13317,6 +13242,81 @@
 			(project ""
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_BJT:DTC113Z")
+		(at 227.33 86.36 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fd87bedf-106a-4847-a2fc-305204859ebf")
+		(property "Reference" "Q6"
+			(at 222.25 87.6301 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DTC113Z"
+			(at 222.25 85.0901 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 227.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Digital NPN Transistor, 1k/10k, SOT-23"
+			(at 227.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9f0b7e2a-37c5-41eb-97eb-5b861c34d6b2")
+		)
+		(pin "3"
+			(uuid "d83265e4-42fd-4537-a38c-b7b587aa6053")
+		)
+		(pin "2"
+			(uuid "a7b1b2a5-eab7-4394-bc58-f08b76015066")
+		)
+		(instances
+			(project "atmega328p-breakout-game"
+				(path "/c006220f-50e8-436e-9254-0df721c83572"
+					(reference "Q6")
 					(unit 1)
 				)
 			)
