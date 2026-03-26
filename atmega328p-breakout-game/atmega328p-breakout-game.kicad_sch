@@ -8088,12 +8088,6 @@
 		(uuid "24db6322-b39e-4f85-b623-5f630ebf1da8")
 	)
 	(junction
-		(at 212.09 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3461a1ca-0943-4da9-acd4-d983890ad61d")
-	)
-	(junction
 		(at 142.24 57.15)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8106,13 +8100,7 @@
 		(uuid "677a1dd1-8376-4b5e-bb8d-93bca65f4b7f")
 	)
 	(junction
-		(at 267.97 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7c820b6e-1b30-403a-9071-de03cc6b820c")
-	)
-	(junction
-		(at 240.03 53.34)
+		(at 227.33 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "abf25342-b572-4bfa-9d21-dc8f4b3bb897")
@@ -8158,16 +8146,6 @@
 	(no_connect
 		(at 82.55 87.63)
 		(uuid "f4ef7875-2902-4478-ad19-37f57fecac10")
-	)
-	(wire
-		(pts
-			(xy 240.03 58.42) (xy 240.03 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "023dd5da-3fa6-4589-84dc-08b466a2d487")
 	)
 	(wire
 		(pts
@@ -8218,16 +8196,6 @@
 			(type default)
 		)
 		(uuid "0a6e5baa-5c9c-4f61-b9ec-355f0c1da21c")
-	)
-	(wire
-		(pts
-			(xy 255.27 58.42) (xy 267.97 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a6f9c64-393f-44ba-a066-ad6e01c01d22")
 	)
 	(wire
 		(pts
@@ -8381,16 +8349,6 @@
 	)
 	(wire
 		(pts
-			(xy 267.97 59.69) (xy 267.97 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42c400a3-2c9c-4e8c-9c1d-42993081f540")
-	)
-	(wire
-		(pts
 			(xy 233.68 102.87) (xy 229.87 102.87)
 		)
 		(stroke
@@ -8521,16 +8479,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 58.42) (xy 212.09 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "64c252bd-73ea-43cd-a5a5-0e35cf58d078")
-	)
-	(wire
-		(pts
 			(xy 165.1 113.03) (xy 165.1 109.22)
 		)
 		(stroke
@@ -8591,7 +8539,7 @@
 	)
 	(wire
 		(pts
-			(xy 223.52 53.34) (xy 240.03 53.34)
+			(xy 210.82 53.34) (xy 227.33 53.34)
 		)
 		(stroke
 			(width 0)
@@ -8691,7 +8639,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 53.34) (xy 247.65 53.34)
+			(xy 227.33 53.34) (xy 237.49 53.34)
 		)
 		(stroke
 			(width 0)
@@ -8741,16 +8689,6 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 53.34) (xy 257.81 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9ba75198-39ac-4fcc-b903-7657339a6d64")
-	)
-	(wire
-		(pts
 			(xy 205.74 118.11) (xy 215.9 118.11)
 		)
 		(stroke
@@ -8771,16 +8709,6 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 58.42) (xy 184.15 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a1d4e978-79cd-40cf-b519-1cf679697d4e")
-	)
-	(wire
-		(pts
 			(xy 123.19 109.22) (xy 133.35 109.22)
 		)
 		(stroke
@@ -8788,16 +8716,6 @@
 			(type default)
 		)
 		(uuid "a62f54bb-e53e-4355-ba0f-1ba7f3cad94e")
-	)
-	(wire
-		(pts
-			(xy 267.97 58.42) (xy 267.97 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a78329e0-f81d-4d2e-8de4-5e417123e783")
 	)
 	(wire
 		(pts
@@ -8921,16 +8839,6 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 58.42) (xy 212.09 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bd36c9bc-a987-4e60-b472-049f5924469d")
-	)
-	(wire
-		(pts
 			(xy 165.1 120.65) (xy 165.1 142.24)
 		)
 		(stroke
@@ -8998,16 +8906,6 @@
 			(type default)
 		)
 		(uuid "d2fe94f8-9288-46b6-9ae3-2cd4f459950f")
-	)
-	(wire
-		(pts
-			(xy 184.15 58.42) (xy 184.15 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d30408cf-14c5-4f82-9c47-b4603ea64d14")
 	)
 	(wire
 		(pts
@@ -9091,7 +8989,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 53.34) (xy 191.77 53.34)
+			(xy 184.15 53.34) (xy 194.31 53.34)
 		)
 		(stroke
 			(width 0)
@@ -9118,16 +9016,6 @@
 			(type default)
 		)
 		(uuid "f1dfd493-371b-408b-9997-bd40205f11e0")
-	)
-	(wire
-		(pts
-			(xy 199.39 53.34) (xy 201.93 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f1e7d4d6-0e67-4b63-a0ae-153e1b58a4c4")
 	)
 	(wire
 		(pts
@@ -9161,26 +9049,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 53.34) (xy 212.09 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f9e7690f-df2d-4048-b9ed-7fb2b0962fda")
-	)
-	(wire
-		(pts
-			(xy 247.65 58.42) (xy 240.03 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fbec759f-e8d7-44b9-bcb5-8f8b100a615b")
-	)
-	(wire
-		(pts
 			(xy 205.74 138.43) (xy 224.79 138.43)
 		)
 		(stroke
@@ -9200,7 +9068,7 @@
 		(uuid "0404965a-15d3-4bd4-9312-f35c9844a75b")
 	)
 	(label "MOVE_LEFT_SW"
-		(at 223.52 53.34 0)
+		(at 210.82 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9570,74 +9438,6 @@
 		(uuid "f2999fb4-866a-473b-bcbd-82aae4c52374")
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 195.58 53.34 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0ea8049a-8ce4-4af5-8e2e-f573e6788e9d")
-		(property "Reference" "R12"
-			(at 195.58 46.99 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10kΩ"
-			(at 195.58 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 195.58 51.562 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 195.58 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 195.58 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1aa6c1b6-2eb3-4a9f-bf45-af0f86cdda79")
-		)
-		(pin "2"
-			(uuid "1224b610-efac-461e-8069-0ef81bd40046")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "R12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 58.42 52.07 0)
 		(unit 1)
@@ -9917,7 +9717,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 240.03 49.53 0)
+		(at 227.33 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9926,7 +9726,7 @@
 		(fields_autoplaced yes)
 		(uuid "3100a2f7-6b38-46a7-83d9-e84b3894e667")
 		(property "Reference" "R3"
-			(at 242.57 48.2599 0)
+			(at 229.87 48.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9935,7 +9735,7 @@
 			)
 		)
 		(property "Value" "10kΩ"
-			(at 242.57 50.7999 0)
+			(at 229.87 50.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9944,7 +9744,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 238.252 49.53 90)
+			(at 225.552 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9953,7 +9753,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 240.03 49.53 0)
+			(at 227.33 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9962,7 +9762,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 240.03 49.53 0)
+			(at 227.33 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11363,7 +11163,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 267.97 59.69 0)
+		(at 247.65 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11372,7 +11172,7 @@
 		(fields_autoplaced yes)
 		(uuid "6952a2c0-c956-40b9-879b-f69017483963")
 		(property "Reference" "#PWR09"
-			(at 267.97 66.04 0)
+			(at 247.65 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11381,7 +11181,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 267.97 64.77 0)
+			(at 247.65 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11389,7 +11189,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 267.97 59.69 0)
+			(at 247.65 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11398,7 +11198,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 267.97 59.69 0)
+			(at 247.65 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11407,7 +11207,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 267.97 59.69 0)
+			(at 247.65 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11882,7 +11682,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 212.09 59.69 0)
+		(at 204.47 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11891,7 +11691,7 @@
 		(fields_autoplaced yes)
 		(uuid "7d236966-a6dd-4bca-9251-e40816bc66aa")
 		(property "Reference" "#PWR07"
-			(at 212.09 66.04 0)
+			(at 204.47 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11900,7 +11700,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 212.09 64.77 0)
+			(at 204.47 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11908,7 +11708,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 212.09 59.69 0)
+			(at 204.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11917,7 +11717,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 212.09 59.69 0)
+			(at 204.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11926,7 +11726,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 212.09 59.69 0)
+			(at 204.47 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12023,7 +11823,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 262.89 53.34 0)
+		(at 242.57 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12032,7 +11832,7 @@
 		(fields_autoplaced yes)
 		(uuid "8a5264d7-fa77-478d-8079-dd675fcbc2fb")
 		(property "Reference" "SW3"
-			(at 262.89 45.72 0)
+			(at 242.57 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12040,7 +11840,7 @@
 			)
 		)
 		(property "Value" "SW_MOVE_LEFT"
-			(at 262.89 48.26 0)
+			(at 242.57 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12048,7 +11848,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm_H4.3mm"
-			(at 262.89 48.26 0)
+			(at 242.57 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12057,7 +11857,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 262.89 48.26 0)
+			(at 242.57 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12066,7 +11866,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 262.89 53.34 0)
+			(at 242.57 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12220,140 +12020,6 @@
 			(project "atmega328p-breakout-game"
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "R11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 251.46 58.42 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9794b1d3-4743-40f8-9596-498b11ccfc0c")
-		(property "Reference" "C4"
-			(at 251.46 64.262 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 251.46 61.976 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 255.27 57.4548 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 251.46 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 251.46 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "82d9c3d3-a752-4379-a8eb-2e71769187f1")
-		)
-		(pin "2"
-			(uuid "b82312f3-5aff-4d4c-b035-a35520e76aeb")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "C4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 195.58 58.42 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9edc1b25-d94e-4914-9685-3257b16433bb")
-		(property "Reference" "C3"
-			(at 195.58 64.262 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 195.58 61.976 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 199.39 57.4548 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 195.58 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 195.58 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "38d2465a-f9b6-4610-b832-a0ebfc9d125d")
-		)
-		(pin "2"
-			(uuid "1822973d-aa53-467d-9294-1fbe67861415")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -12553,74 +12219,6 @@
 			(project ""
 				(path "/c006220f-50e8-436e-9254-0df721c83572"
 					(reference "#PWR05")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 251.46 53.34 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c58fe4a4-501d-44cc-8cab-7de002abcce4")
-		(property "Reference" "R13"
-			(at 251.46 46.99 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10kΩ"
-			(at 251.46 49.53 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 251.46 51.562 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 251.46 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 251.46 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "69b59a81-0deb-48ac-a4cc-9320520667b8")
-		)
-		(pin "2"
-			(uuid "06315bc8-5052-4bea-9b22-964089e1b9f6")
-		)
-		(instances
-			(project "atmega328p-breakout-game"
-				(path "/c006220f-50e8-436e-9254-0df721c83572"
-					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -13049,7 +12647,7 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 240.03 45.72 0)
+		(at 227.33 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13058,7 +12656,7 @@
 		(fields_autoplaced yes)
 		(uuid "ec8ac9b0-212e-4226-9597-a0d354d07dcd")
 		(property "Reference" "#PWR08"
-			(at 240.03 49.53 0)
+			(at 227.33 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13067,7 +12665,7 @@
 			)
 		)
 		(property "Value" "VCC"
-			(at 240.03 40.64 0)
+			(at 227.33 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13075,7 +12673,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 240.03 45.72 0)
+			(at 227.33 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13084,7 +12682,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 240.03 45.72 0)
+			(at 227.33 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13093,7 +12691,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 240.03 45.72 0)
+			(at 227.33 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13115,7 +12713,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 207.01 53.34 0)
+		(at 199.39 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13124,7 +12722,7 @@
 		(fields_autoplaced yes)
 		(uuid "f861198a-9ee3-477d-93c0-d32236e3090b")
 		(property "Reference" "SW2"
-			(at 207.01 45.72 0)
+			(at 199.39 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13132,7 +12730,7 @@
 			)
 		)
 		(property "Value" "SW_MOVE_RIGHT"
-			(at 207.01 48.26 0)
+			(at 199.39 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13140,7 +12738,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm_H4.3mm"
-			(at 207.01 48.26 0)
+			(at 199.39 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13149,7 +12747,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 207.01 48.26 0)
+			(at 199.39 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13158,7 +12756,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 207.01 53.34 0)
+			(at 199.39 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)

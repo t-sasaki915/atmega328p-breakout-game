@@ -3,7 +3,7 @@
 #include <util/atomic.h>
 #include <util/delay.h>
 
-#define TARGET_BALL_ROWS 2
+#define TARGET_BALL_ROWS 3
 
 #define MATRIX_LED_WIDTH 8
 #define MATRIX_LED_HEIGHT 8
@@ -51,7 +51,7 @@ static const PortConfig MATRIX_LED_ROW_PINS[] = {
 };
 
 static MovingBall MOVING_BALL = {0, 1, 1, 1};
-static uint8_t TARGET_BALLS[TARGET_BALL_ROWS] = {0b11111111, 0b11111111};
+static uint8_t TARGET_BALLS[TARGET_BALL_ROWS] = {0b11111111, 0b11111111, 0b11111111};
 static volatile uint8_t PADDLE_POSITION = 0;
 static volatile uint8_t IS_GAMEOVER = 0;
 
@@ -60,6 +60,9 @@ static uint8_t VRAM_2[8];
 static uint8_t *VRAM_TEMP = VRAM_1;
 static volatile uint8_t *VRAM_DISPLAY = VRAM_2;
 static volatile uint8_t CURRENT_VIEW_LINE = 0;
+
+static volatile uint8_t SW_MOVE_RIGHT_COOLDOWN = 0;
+static volatile uint8_t SW_MOVE_LEFT_COOLDOWN = 0;
 
 void MoveBall(void)
 {
@@ -130,9 +133,22 @@ void MoveBall(void)
 
     if (newY >= MATRIX_LED_WIDTH - TARGET_BALL_ROWS)
     {
-        if (TARGET_BALLS[MATRIX_LED_Y_MAX - newY] & (1 << newX))
+        int8_t relativeY = MATRIX_LED_Y_MAX - newY;
+
+        if (TARGET_BALLS[relativeY] & (1 << newX))
         {
-            TARGET_BALLS[MATRIX_LED_Y_MAX - newY] &= ~(1 << newX);
+            TARGET_BALLS[relativeY] &= ~(1 << newX);
+
+            int8_t neighbourX = newX - newDX;
+            if (neighbourX >= 0 && neighbourX <= MATRIX_LED_X_MAX)
+            {
+                TARGET_BALLS[relativeY] &= ~(1 << neighbourX);
+            }
+            int8_t neighbourY = relativeY + newDY;
+            if (neighbourY >= MATRIX_LED_WIDTH - TARGET_BALL_ROWS && neighbourY < TARGET_BALL_ROWS)
+            {
+                TARGET_BALLS[neighbourY] &= ~(1 << newX);
+            }
 
             newDY *= -1;
 
@@ -174,14 +190,14 @@ void UpdateVRAM(void)
         VRAM_TEMP[i] = 0;
     }
 
-    VRAM_TEMP[MOVING_BALL.y] |= (1 << MOVING_BALL.x);
-
-    VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
-
     for (uint8_t i = 0; i < TARGET_BALL_ROWS; i++)
     {
         VRAM_TEMP[MATRIX_LED_Y_MAX - i] = TARGET_BALLS[i];
     }
+
+    VRAM_TEMP[MOVING_BALL.y] |= (1 << MOVING_BALL.x);
+
+    VRAM_TEMP[0] |= (1 << PADDLE_POSITION) | (1 << (PADDLE_POSITION + 1));
 
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
     {
@@ -196,9 +212,18 @@ void UpdateVRAM(void)
 #define HIGH_PORT(portConf) *(portConf.port) |= (1 << (portConf.bit))
 #define LOW_PORT(portConf) *(portConf.port) &= ~(1 << (portConf.bit))
 
-// View timer
+// 1ms timer
 ISR(TIMER1_COMPA_vect)
 {
+    if (SW_MOVE_LEFT_COOLDOWN != 0)
+    {
+        SW_MOVE_LEFT_COOLDOWN--;
+    }
+    if (SW_MOVE_RIGHT_COOLDOWN != 0)
+    {
+        SW_MOVE_RIGHT_COOLDOWN--;
+    }
+
     if (CURRENT_VIEW_LINE == 0)
     {
         LOW_PORT(MATRIX_LED_ROW_PINS[MATRIX_LED_Y_MAX]);
@@ -235,6 +260,13 @@ ISR(TIMER1_COMPA_vect)
 // MOVE_LEFT_SW
 ISR(INT1_vect)
 {
+    if (SW_MOVE_LEFT_COOLDOWN != 0)
+    {
+        return;
+    }
+
+    SW_MOVE_LEFT_COOLDOWN = 8;
+
     if (IS_GAMEOVER)
     {
         return;
@@ -251,6 +283,13 @@ ISR(INT1_vect)
 // MOVE_RIGHT_SW
 ISR(INT0_vect)
 {
+    if (SW_MOVE_RIGHT_COOLDOWN != 0)
+    {
+        return;
+    }
+
+    SW_MOVE_RIGHT_COOLDOWN = 8;
+
     if (IS_GAMEOVER)
     {
         return;
@@ -273,7 +312,7 @@ void InitInterruption(void)
 
 void InitTimer(void)
 {
-    OCR1A = 124;
+    OCR1A = 124; // 1ms
     TCCR1B |= (1 << WGM12);
     TCCR1B |= (1 << CS11);
     TIMSK1 |= (1 << OCIE1A);
@@ -308,7 +347,7 @@ int main(void)
             UpdateVRAM();
         }
 
-        _delay_ms(10);
+        _delay_ms(30);
     }
 
     return 0;
