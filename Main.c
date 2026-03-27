@@ -265,7 +265,7 @@ ISR(INT1_vect)
         return;
     }
 
-    SW_MOVE_LEFT_COOLDOWN = 8;
+    SW_MOVE_LEFT_COOLDOWN = 10;
 
     if (IS_GAMEOVER)
     {
@@ -288,7 +288,7 @@ ISR(INT0_vect)
         return;
     }
 
-    SW_MOVE_RIGHT_COOLDOWN = 8;
+    SW_MOVE_RIGHT_COOLDOWN = 10;
 
     if (IS_GAMEOVER)
     {
