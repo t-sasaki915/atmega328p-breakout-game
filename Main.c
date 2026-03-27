@@ -145,7 +145,7 @@ void MoveBall(void)
                 TARGET_BALLS[relativeY] &= ~(1 << neighbourX);
             }
             int8_t neighbourY = relativeY + newDY;
-            if (neighbourY >= MATRIX_LED_WIDTH - TARGET_BALL_ROWS && neighbourY < TARGET_BALL_ROWS)
+            if (neighbourY >= 0 && neighbourY < TARGET_BALL_ROWS)
             {
                 TARGET_BALLS[neighbourY] &= ~(1 << newX);
             }
