@@ -347,7 +347,7 @@ int main(void)
             UpdateVRAM();
         }
 
-        _delay_ms(30);
+        _delay_ms(15);
     }
 
     return 0;

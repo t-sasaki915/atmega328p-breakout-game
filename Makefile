@@ -21,7 +21,7 @@ $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -O ihex $(TARGET).elf $(TARGET).hex
 
 flash: $(TARGET).hex
-	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -U flash:w:$(TARGET).hex:i
+	$(AVRDUDE) -c $(PROGRAMMER) -B 4 -p $(MCU) -U flash:w:$(TARGET).hex:i
 
 clean:
 	del $(TARGET).elf $(TARGET).hex
